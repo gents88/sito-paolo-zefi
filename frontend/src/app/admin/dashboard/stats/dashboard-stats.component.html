@@ -1,0 +1,14 @@
+<div class="stats-grid">
+  <a *ngFor="let stat of stats; trackBy: trackByLabel" [routerLink]="stat.route" class="stat-card card">
+    <div class="stat-card__icon" [style.background]="stat.color + '22'" [style.color]="stat.color">
+      <mat-icon>{{ stat.icon }}</mat-icon>
+    </div>
+    <div class="stat-card__content">
+      <p class="stat-card__value">{{ stat.value }}</p>
+      <p class="stat-card__label text-muted">{{ stat.labelKey | translate }}</p>
+      <div class="stat-mini-chart" aria-hidden="true">
+        <span *ngFor="let bar of stat.miniBars; let i = index" class="stat-mini-chart__bar" [style.height.%]="bar" [style.background]="stat.color"></span>
+      </div>
+    </div>
+  </a>
+</div>

@@ -1,30 +1,27 @@
 {
   "common": {
-      "chapter": "Kapitulli II",
-      "title": "Lezha",
+    "id": "ID",
+    "login": "Hyr",
     "logout": "Dil",
     "dashboard": "Paneli i Kontrollit",
     "username": "Emri i përdoruesit",
     "email": "Email",
     "password": "Fjalëkalimi",
     "submit": "Dërgo",
-      "chapter": "Kapitulli III",
-      "title": "Galeria",
+    "cancel": "Anulo",
     "delete": "Fshi",
     "edit": "Redakto",
     "save": "Ruaj",
-      "chapter": "Kapitulli IV",
-      "title": "Publicime",
+    "loading": "Ngarkim...",
     "error": "Gabim",
     "success": "Sukses",
     "warning": "Paralajmërim",
-      "chapter": "Kapitulli V",
-      "title": "Video",
+    "info": "Info",
     "close": "Mbyll",
     "search": "Kërko",
     "welcome": "Mirësevini",
-    "language": "Gjuha"
-    ,"read": "Lexo",
+    "language": "Gjuha",
+    "read": "Lexo",
     "download": "Shkarko"
   },
   "actions": {
@@ -70,7 +67,63 @@
     "settings": "Cilësimet",
     "logout_button": "Dil",
     "profile": "Profili",
-    "back_home": "Kthehu në Shtëpi"
+    "back_home": "Kthehu në Shtëpi",
+    "cards": { "articles": "Artikuj", "books": "Librat", "videos": "Video" },
+    "videos": { "title": "Video", "new": "Video e Re" },
+    "status": "Statusi",
+    "video": { "title": "Titulli", "youtube_url": "URL e YouTube", "description": "Përshkrim" },
+    "book": { "title": "Titulli", "author": "Autori", "description": "Përshkrim" },
+    "article": { "title": "Titulli", "subtitle": "Nëntitulli", "content": "Përmbajtja" },
+    "refresh_data": "Përditëso të Dhënat",
+    "last_updated": "Përditësuar përfundimisht",
+    "logout": "Dil",
+    "logout_desc": "Dilni nga paneli i administrimit",
+    "recent_contacts_chart": "Mesazhe të Fundit",
+    "last_7_days": "7 ditët e fundit",
+    "visits_chart": "Grafiku i Vizitave",
+    "public_traffic": "Trafiku Publik",
+    "visits": "Vizita",
+    "visitors": "Vizituesit",
+    "content_mix": "Përzierja e Përmbajtjes",
+    "content_status": "Statusi i Përmbajtjes",
+    "published": "Botuar",
+    "drafts": "Draftet",
+    "top_posts_title": "Top Postimet",
+    "top_posts_desc_card": "Postimet më të shitura",
+    "top_posts_empty": "Nuk ka postime të disponueshme",
+    "consent": {
+      "title": "Miratimi i Përdoruesit",
+      "desc": "Statistika e Miratimit",
+      "total": "Totali"
+    },
+    "quick_actions": "Veprimet e Shpejta",
+    "quick_articles": "Artikuj të Rinj",
+    "quick_users": "Menaxho Përdoruesit",
+    "recent_activity": "Aktiviteti i Fundit",
+    "select_all": "Zgjidh Të Gjithën",
+    "selected": "të zgjedhur",
+    "delete_selected": "Fshi të Zgjedhur",
+    "delete_sweep": "Fshi",
+    "new_badge": "I RI",
+    "chat_sessions_section": "Chat Sot",
+    "chat_sessions_today": "Seansit e Chat Sot",
+    "chat_sessions_today_desc": "Biseda aktive",
+    "chat_sessions_load": "Ngarko Seansit",
+    "chat_sessions_empty": "Nuk ka seansesh sot",
+    "chat_messages_count": "mesazhe",
+    "utility_section": "Shërbim",
+    "utility_deployment": "Vendosja",
+    "utility_deployment_desc": "Informacioni i serverit",
+    "utility_security": "Siguria",
+    "utility_security_desc": "Statusi i sigurisë",
+    "utility_operations": "Operacionet",
+    "utility_operations_desc": "Aksionet e sistemit",
+    "system_status": "Statusi i Sistemit",
+    "system_version": "Versioni",
+    "system_env": "Mjedisi",
+    "export_csv": "Eksporto CSV",
+    "reset_monthly_stats": "Rivendos Statistikat Mujore",
+    "unread_contacts": "Mesazhe të Palexuara"
   },
   "sections": {
     "biografia": {
@@ -92,21 +145,49 @@
     },
     "lezha": {
       "title": "Lezha",
+      "chapter": "Kapitulli II",
       "description": "Eksploroni historinë dhe kulturën e Lezhës",
-      "subtitle": "Tremila vjet histori, dy shekuj lavdie, një fat i nderuar",
+      "subtitle": "3000 vjet histori, dy shekuj lavdie, një fat i nderuar",
       "quote": "Lezha nuk është vetëm një qytet, është zemra e rezistencës shqiptare kundër shtypjes osmane.",
-      "quote_author": "— Paulin Zefi"
+      "quote_author": "— Paulin Zefi",
+      "timeline": {
+        "t1": { "label": "Themelimi i Lissus" },
+        "t2": { "label": "Dominimi Venecian" },
+        "t3": { "label": "Lidhja e Alessios" },
+        "t4": { "label": "Vdekja e Skanderbeg" },
+        "t5": { "label": "Pavarësia Shqiptare" }
+      },
+      "stories": {
+        "s1": { "title": "Lissus, Fortesa Ilire", "description": "Qyteti i lashtë i themeluar nga grekët, një bastion strategjik i Detit Adriatik" },
+        "s2": { "title": "Dominimi Venecian", "description": "Lezha nën sundimin e Republikës së Venecias, qendër tregtie dhe pushteti" },
+        "s3": { "title": "Beselidhja e Lezhës", "description": "Pakti historik që bashkoi princërit shqiptarë kundër Perandorisë Osmane" },
+        "s4": { "title": "Epoka e Skanderbeg", "description": "Rezistenca e lavdishme e udhëhequr nga Gjergj Kastrioti Skanderbeg kundër osmanëve" },
+        "s5": { "title": "Varri i Heroit", "description": "Varri i Skanderbeg në kishën e Shën Nikollës, një monument i kujtesës" },
+        "s6": { "title": "Kalaja e Lezhës", "description": "Rrënojat e kalasë rrëfejnë histori lavdie, sakrifice dhe rezistence" }
+      }
     },
     "galleria": {
       "title": "Galeria",
+      "chapter": "Kapitulli III",
       "description": "Shfletoni galerinë tonë të fotografive"
     },
     "pubblicazioni": {
       "title": "Publikime",
-      "description": "Lexoni publikimet e Paulin Zefi"
+      "chapter": "Kapitulli IV",
+      "description": "Lexoni publikimet e Paulin Zefi",
+      "types": { "book": "Libër", "article": "Artikull", "research": "Kërkim" },
+      "items": {
+        "p1": { "title": "Skanderbeg dhe Lidhja e Alessios", "description": "Një studim i thelluar mbi Gjergj Kastrioti dhe rezistencën shqiptare të shekullit XV." },
+        "p2": { "title": "Fortifikimet mesjetare të Lezhës", "description": "Studim arkeologjik i mureve dhe strukturave mbrojtëse." },
+        "p3": { "title": "Kujtesa e Lezhës", "description": "Koleksion dokumentesh historike të papublikuara nga arkivat evropiane." },
+        "p4": { "title": "Kalaja nën sundimin venecian", "description": "Analizë kartografike dhe arkivore e periudhës 1393-1479." },
+        "p5": { "title": "Manuskriptet e Lidhjes së Alessios", "description": "Katalogim dhe transkriptim dokumentesh diplomatike." },
+        "p6": { "title": "Kisha e Shën Nikollës", "description": "Historia dhe konservimi i memorialit të Skanderbeg." }
+      }
     },
     "video": {
       "title": "Videot",
+      "chapter": "Kapitulli V",
       "description": "Shikoni koleksionin tonë të videove"
     },
     "hero": {
@@ -131,6 +212,17 @@
       "message_error": "Gabim në dërgimin e mesazhit. Ju lutemi provoni përsëri."
     }
   },
+  "pubblicazioni": {
+    "types": { "book": "Libër", "article": "Artikull", "research": "Kërkim" },
+    "items": {
+      "p1": { "title": "Skanderbeg dhe Lidhja e Alessios", "description": "Një studim i thelluar mbi Gjergj Kastrioti dhe rezistencën shqiptare të shekullit XV." },
+      "p2": { "title": "Fortifikimet mesjetare të Lezhës", "description": "Studim arkeologjik i mureve dhe strukturave mbrojtëse." },
+      "p3": { "title": "Kujtesa e Lezhës", "description": "Koleksion dokumentesh historike të papublikuara nga arkivat evropiane." },
+      "p4": { "title": "Kala nën sundimin Venetian", "description": "Analizë kartografike dhe arkivore e periudhës 1393-1479." },
+      "p5": { "title": "Dorëshkrimet e Lidhjes së Alessios", "description": "Katalogim dhe transkriptim i dokumenteve diplomatike." },
+      "p6": { "title": "Kisha e Shen Nikolës", "description": "Histori dhe ruajtja e memorialit të Skanderbeut." }
+    }
+  },
   "content": {
     "not_found": "Artikulli nuk u gjet"
   },
@@ -141,10 +233,18 @@
     "contact": "Kontaktoni Ne",
     "social": "Na Ndiqni"
   },
+  "preloader": {
+    "aquila": "Shqiponjë"
+  },
   "validation": {
     "required": "Ky fushë është i detyrueshëm",
     "email_invalid": "Ju lutemi futni një email të vlefshëm",
     "password_min": "Fjalëkalimi duhet të ketë të paktën 8 karaktere",
     "password_match": "Fjalëkalimet nuk përputhen"
+  },
+  "consent": {
+    "analytics": "Analytics",
+    "marketing": "Marketing",
+    "preferences": "Preferencat"
   }
 }

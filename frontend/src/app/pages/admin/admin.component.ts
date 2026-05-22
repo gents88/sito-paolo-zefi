@@ -29,7 +29,7 @@ import { AuthService } from '@core/services/auth.service';
               <p class="stat-number">1</p>
             </div>
             <div class="stat-card">
-              <h3>Status</h3>
+              <h3>{{ 'admin.status' | translate }}</h3>
               <p class="stat-number">🟢 {{ 'common.success' | translate }}</p>
             </div>
             <div class="stat-card">
@@ -43,7 +43,7 @@ import { AuthService } from '@core/services/auth.service';
           <h2>{{ 'admin.profile' | translate }}</h2>
           <div class="user-info">
             <div class="info-row">
-              <span class="label">ID:</span>
+              <span class="label">{{ 'common.id' | translate }}:</span>
               <span class="value">{{ currentUser()?.id }}</span>
             </div>
             <div class="info-row">

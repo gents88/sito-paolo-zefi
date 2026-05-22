@@ -37,7 +37,7 @@ export class ContentService {
     ],
     timelineItems: [
       {
-        year: '1965',
+        year: '1983',
         title: 'Nascita',
         description: 'Paulin Zefi nasce a Lezha',
       },

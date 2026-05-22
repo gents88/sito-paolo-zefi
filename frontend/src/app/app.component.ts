@@ -1,6 +1,7 @@
 import { Component, OnInit, Renderer2, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { filter } from 'rxjs/operators';
 import { LanguageService } from '@core/services/language.service';
 import { AudioService } from '@core/services/audio.service';
@@ -9,12 +10,12 @@ import { FaviconService } from '@core/services/favicon.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, TranslateModule],
   template: `
     <!-- Preloader con aquila albanese -->
     <div *ngIf="showPreloader" class="preloader" id="preloader">
       <div class="preloader-content">
-        <img src="assets/icons/eagle.svg" alt="Aquila" class="preloader-crest" />
+        <img src="assets/icons/eagle.svg" [attr.alt]="'preloader.aquila' | translate" class="preloader-crest" />
         <div class="preloader-bar"><span></span></div>
       </div>
     </div>

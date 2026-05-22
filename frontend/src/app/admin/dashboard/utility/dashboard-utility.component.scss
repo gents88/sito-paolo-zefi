@@ -1,0 +1,65 @@
+.section-label {
+  margin-top: 18px;
+  margin-bottom: 8px;
+  font-size: 1.05rem;
+}
+
+.utility-accordion {
+  margin-top: 12px;
+}
+
+.utility-panel-icon {
+  margin-right: 8px;
+}
+
+.utility-kv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.utility-kv {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.utility-status--ok {
+  color: #10b981;
+}
+
+.utility-status--warn {
+  color: #ef4444;
+}
+
+.utility-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.utility-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+
+.utility-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.utility-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  cursor: pointer;
+}

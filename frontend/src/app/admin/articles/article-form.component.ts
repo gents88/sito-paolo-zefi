@@ -4,19 +4,20 @@ import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angula
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { TranslateModule } from '@ngx-translate/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { AdminApiService } from '../../core/services/admin-api.service';
 
 @Component({
   standalone: true,
   selector: 'app-admin-article-form',
-  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, RouterModule, TranslateModule],
   template: `
     <form [formGroup]="form" (ngSubmit)="save()">
-      <mat-form-field appearance="fill"><mat-label>Title</mat-label><input matInput formControlName="title" /></mat-form-field>
-      <mat-form-field appearance="fill"><mat-label>Subtitle</mat-label><input matInput formControlName="subtitle" /></mat-form-field>
-      <mat-form-field appearance="fill"><mat-label>Content</mat-label><textarea matInput formControlName="content" rows="10"></textarea></mat-form-field>
-      <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Save</button>
+      <mat-form-field appearance="fill"><mat-label>{{ 'admin.article.title' | translate }}</mat-label><input matInput formControlName="title" /></mat-form-field>
+      <mat-form-field appearance="fill"><mat-label>{{ 'admin.article.subtitle' | translate }}</mat-label><input matInput formControlName="subtitle" /></mat-form-field>
+      <mat-form-field appearance="fill"><mat-label>{{ 'admin.article.content' | translate }}</mat-label><textarea matInput formControlName="content" rows="10"></textarea></mat-form-field>
+      <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">{{ 'common.save' | translate }}</button>
     </form>
   `,
 })

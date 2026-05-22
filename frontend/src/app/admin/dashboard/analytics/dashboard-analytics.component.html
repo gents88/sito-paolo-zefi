@@ -1,0 +1,124 @@
+<div class="analytics-grid">
+  <!-- Contacts Chart -->
+  <section class="analytics-card card">
+    <div class="analytics-card__header">
+      <div>
+        <h2>{{ 'admin.recent_contacts_chart' | translate }}</h2>
+        <p class="text-muted">{{ 'admin.last_7_days' | translate }}</p>
+      </div>
+      <mat-icon>bar_chart</mat-icon>
+    </div>
+
+    <div class="contact-chart" aria-hidden="true">
+      <ng-container *ngIf="contactBars.length; else noChartData">
+        <div *ngFor="let bar of contactBars; trackBy: trackByDate" class="contact-chart__item">
+          <span class="contact-chart__value">{{ bar.value }}</span>
+          <div class="contact-chart__bar-wrap">
+            <span class="contact-chart__bar" [style.height]="contactBarHeight(bar.value)"></span>
+          </div>
+          <span class="contact-chart__label text-muted">{{ bar.date | date:'dd/MM' }}</span>
+        </div>
+      </ng-container>
+      <ng-template #noChartData>
+        <p class="text-muted h-bars__empty">{{ 'admin.no_chart_data' | translate }}</p>
+      </ng-template>
+    </div>
+  </section>
+
+  <!-- Visits Chart -->
+  <section class="analytics-card card">
+    <div class="analytics-card__header">
+      <div>
+        <h2>{{ 'admin.visits_chart' | translate }}</h2>
+        <p class="text-muted">{{ 'admin.public_traffic' | translate }}</p>
+      </div>
+      <mat-icon>show_chart</mat-icon>
+    </div>
+
+    <div class="visit-summary">
+      <div class="visit-summary__item">
+        <strong>{{ totalViews }}</strong>
+        <span class="text-muted">{{ 'admin.visits' | translate }}</span>
+      </div>
+      <div class="visit-summary__item">
+        <strong>{{ uniqueVisitors }}</strong>
+        <span class="text-muted">{{ 'admin.visitors' | translate }}</span>
+      </div>
+    </div>
+
+    <div class="contact-chart contact-chart--visits" aria-hidden="true">
+      <ng-container *ngIf="visitBars.length; else noVisitData">
+        <div *ngFor="let bar of visitBars; trackBy: trackByDate" class="contact-chart__item">
+          <span class="contact-chart__value">{{ bar.value }}</span>
+          <div class="contact-chart__bar-wrap">
+            <span class="contact-chart__bar contact-chart__bar--visits" [style.height]="visitBarHeight(bar.value)"></span>
+          </div>
+          <span class="contact-chart__label text-muted">{{ bar.date | date:'dd/MM' }}</span>
+        </div>
+      </ng-container>
+      <ng-template #noVisitData>
+        <p class="text-muted h-bars__empty">{{ 'admin.no_chart_data' | translate }}</p>
+      </ng-template>
+    </div>
+  </section>
+
+  <!-- Content Mix -->
+  <section class="analytics-card card">
+    <div class="analytics-card__header">
+      <div>
+        <h2>{{ 'admin.content_mix' | translate }}</h2>
+        <p class="text-muted">{{ 'admin.content_status' | translate }}</p>
+      </div>
+      <mat-icon>donut_large</mat-icon>
+    </div>
+
+    <div class="content-mix">
+      <div class="content-mix__bar" aria-hidden="true">
+        <span class="content-mix__segment content-mix__segment--published" [style.width.%]="publishedPercent"></span>
+        <span class="content-mix__segment content-mix__segment--drafts" [style.width.%]="draftPercent"></span>
+      </div>
+
+      <div class="content-mix__legend">
+        <div class="mix-item">
+          <span class="mix-item__dot mix-item__dot--published"></span>
+          <div>
+            <strong>{{ publishedPosts }}</strong>
+            <p class="text-muted">{{ 'admin.published' | translate }}</p>
+          </div>
+        </div>
+        <div class="mix-item">
+          <span class="mix-item__dot mix-item__dot--drafts"></span>
+          <div>
+            <strong>{{ draftPosts }}</strong>
+            <p class="text-muted">{{ 'admin.drafts' | translate }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Top Posts -->
+  <section class="analytics-card card">
+    <div class="analytics-card__header">
+      <div>
+        <h2>{{ 'admin.top_posts_title' | translate }}</h2>
+        <p class="text-muted">{{ 'admin.top_posts_desc_card' | translate }}</p>
+      </div>
+      <mat-icon>trending_up</mat-icon>
+    </div>
+
+    <ng-container *ngIf="topPosts.length; else topPostsEmpty">
+      <ul class="top-posts-list">
+        <li *ngFor="let post of topPosts; trackBy: trackById" class="top-posts-list__item">
+          <a [routerLink]="['/blog', post.slug]" target="_blank" rel="noopener" class="top-posts-list__title">{{ post.title }}</a>
+          <span class="top-posts-list__views">
+            <mat-icon style="font-size:14px;height:14px;width:14px;vertical-align:middle">visibility</mat-icon>&nbsp;{{ post.viewCount }}
+          </span>
+        </li>
+      </ul>
+    </ng-container>
+    <ng-template #topPostsEmpty>
+      <p class="text-muted" style="margin-top:1rem;">{{ 'admin.top_posts_empty' | translate }}</p>
+    </ng-template>
+  </section>
+</div>

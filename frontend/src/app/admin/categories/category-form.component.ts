@@ -5,17 +5,18 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { AdminApiService } from '../../core/services/admin-api.service';
 
 @Component({
   standalone: true,
   selector: 'app-admin-category-form',
-  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, RouterModule, TranslateModule],
   template: `
     <form [formGroup]="form" (ngSubmit)="save()">
-      <mat-form-field appearance="fill"><mat-label>Name</mat-label><input matInput formControlName="name" /></mat-form-field>
-      <mat-form-field appearance="fill"><mat-label>Slug</mat-label><input matInput formControlName="slug" /></mat-form-field>
-      <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Save</button>
+      <mat-form-field appearance="fill"><mat-label>{{ 'admin.category.name' | translate }}</mat-label><input matInput formControlName="name" /></mat-form-field>
+      <mat-form-field appearance="fill"><mat-label>{{ 'admin.category.slug' | translate }}</mat-label><input matInput formControlName="slug" /></mat-form-field>
+      <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">{{ 'common.save' | translate }}</button>
     </form>
   `,
 })

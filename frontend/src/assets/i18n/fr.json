@@ -1,30 +1,27 @@
 {
   "common": {
-      "chapter": "Chapitre II",
-      "title": "Lezha",
+    "id": "ID",
+    "login": "Connexion",
     "logout": "Déconnexion",
     "dashboard": "Tableau de bord",
     "username": "Nom d'utilisateur",
     "email": "Email",
     "password": "Mot de passe",
     "submit": "Soumettre",
-      "chapter": "Chapitre III",
-      "title": "Galerie",
+    "cancel": "Annuler",
     "delete": "Supprimer",
     "edit": "Modifier",
     "save": "Enregistrer",
-      "chapter": "Chapitre IV",
-      "title": "Publications",
+    "loading": "Chargement...",
     "error": "Erreur",
     "success": "Succès",
     "warning": "Avertissement",
-      "chapter": "Chapitre V",
-      "title": "Vidéos",
+    "info": "Info",
     "close": "Fermer",
     "search": "Rechercher",
     "welcome": "Bienvenue",
-    "language": "Langue"
-    ,"read": "Lire",
+    "language": "Langue",
+    "read": "Lire",
     "download": "Télécharger"
   },
   "actions": {
@@ -70,7 +67,63 @@
     "settings": "Paramètres",
     "logout_button": "Se déconnecter",
     "profile": "Profil",
-    "back_home": "Retour à l'accueil"
+    "back_home": "Retour à l'accueil",
+    "cards": { "articles": "Articles", "books": "Livres", "videos": "Vidéos" },
+    "videos": { "title": "Vidéos", "new": "Nouvelle Vidéo" },
+    "status": "Statut",
+    "video": { "title": "Titre", "youtube_url": "URL YouTube", "description": "Description" },
+    "book": { "title": "Titre", "author": "Auteur", "description": "Description" },
+    "article": { "title": "Titre", "subtitle": "Sous-titre", "content": "Contenu" },
+    "refresh_data": "Rafraîchir les Données",
+    "last_updated": "Dernière mise à jour",
+    "logout": "Se déconnecter",
+    "logout_desc": "Quitter le panneau d'administration",
+    "recent_contacts_chart": "Messages Récents",
+    "last_7_days": "7 derniers jours",
+    "visits_chart": "Graphique des Visites",
+    "public_traffic": "Trafic Public",
+    "visits": "Visites",
+    "visitors": "Visiteurs",
+    "content_mix": "Mélange de Contenu",
+    "content_status": "État du Contenu",
+    "published": "Publié",
+    "drafts": "Brouillons",
+    "top_posts_title": "Top Articles",
+    "top_posts_desc_card": "Articles les plus consultés",
+    "top_posts_empty": "Aucun article disponible",
+    "consent": {
+      "title": "Consentements Utilisateur",
+      "desc": "Statistiques de Consentement",
+      "total": "Total"
+    },
+    "quick_actions": "Actions Rapides",
+    "quick_articles": "Nouveaux Articles",
+    "quick_users": "Gérer les Utilisateurs",
+    "recent_activity": "Activité Récente",
+    "select_all": "Sélectionner Tout",
+    "selected": "sélectionnés",
+    "delete_selected": "Supprimer la Sélection",
+    "delete_sweep": "Supprimer",
+    "new_badge": "NOUVEAU",
+    "chat_sessions_section": "Chat Aujourd'hui",
+    "chat_sessions_today": "Sessions Chat Aujourd'hui",
+    "chat_sessions_today_desc": "Conversations actives",
+    "chat_sessions_load": "Charger les Sessions",
+    "chat_sessions_empty": "Aucune session aujourd'hui",
+    "chat_messages_count": "messages",
+    "utility_section": "Utilitaire",
+    "utility_deployment": "Déploiement",
+    "utility_deployment_desc": "Infos serveur",
+    "utility_security": "Sécurité",
+    "utility_security_desc": "État de sécurité",
+    "utility_operations": "Opérations",
+    "utility_operations_desc": "Actions système",
+    "system_status": "État du Système",
+    "system_version": "Version",
+    "system_env": "Environnement",
+    "export_csv": "Exporter CSV",
+    "reset_monthly_stats": "Réinitialiser les Statistiques Mensuelles",
+    "unread_contacts": "Messages non Lus"
   },
   "sections": {
     "biografia": {
@@ -90,21 +143,49 @@
     },
     "lezha": {
       "title": "Lezha",
+      "chapter": "Chapitre II",
       "description": "Explorez l'histoire et la culture de Lezha",
       "subtitle": "Trois mille ans d'histoire, deux siècles de gloire, une destinée glorieuse",
       "quote": "Lezha n'est pas seulement une ville, c'est le cœur de la résistance albanaise contre l'oppression ottomane.",
-      "quote_author": "— Paulin Zefi"
+      "quote_author": "— Paulin Zefi",
+      "timeline": {
+        "t1": { "label": "Fondation de Lissus" },
+        "t2": { "label": "Dominion vénitien" },
+        "t3": { "label": "Ligue d'Alessio" },
+        "t4": { "label": "Mort de Skanderbeg" },
+        "t5": { "label": "Indépendance albanaise" }
+      },
+      "stories": {
+        "s1": { "title": "Lissus, la Forteresse Illyrienne", "description": "La ville ancienne fondée par les Grecs, un bastion stratégique de la mer Adriatique" },
+        "s2": { "title": "Le Dominion vénitien", "description": "Lezha sous la domination de la République de Venise, centre de commerce et de pouvoir" },
+        "s3": { "title": "La Ligue d'Alessio", "description": "Le pacte historique qui a uni les princes albanais contre l'Empire ottoman" },
+        "s4": { "title": "L'ère de Skanderbeg", "description": "La glorieuse résistance menée par Gjergj Kastrioti Skanderbeg contre les Ottomans" },
+        "s5": { "title": "La Tombe du Héros", "description": "La tombe de Skanderbeg à l'église Saint-Nicolas, un monument de mémoire" },
+        "s6": { "title": "Le Château de Lezha", "description": "Les ruines du château racontent des histoires de gloire, de sacrifice et de résilience" }
+      }
     },
     "galleria": {
       "title": "Galerie",
+      "chapter": "Chapitre III",
       "description": "Parcourez notre galerie de photos"
     },
     "pubblicazioni": {
       "title": "Publications",
-      "description": "Lisez les publications de Paulin Zefi"
+      "chapter": "Chapitre IV",
+      "description": "Lisez les publications de Paulin Zefi",
+      "types": { "book": "Livre", "article": "Article", "research": "Recherche" },
+      "items": {
+        "p1": { "title": "Skanderbeg et la Ligue d'Alessio", "description": "Une étude approfondie sur Gjergj Kastrioti et la résistance albanaise du XVe siècle." },
+        "p2": { "title": "Fortifications médiévales de Lezha", "description": "Étude archéologique des murailles et des structures défensives." },
+        "p3": { "title": "La Mémoire de Lezha", "description": "Collection de documents historiques inédits provenant d'archives européennes." },
+        "p4": { "title": "Le Château sous la domination vénitienne", "description": "Analyse cartographique et archivistique de la période 1393-1479." },
+        "p5": { "title": "Manuscrits de la Ligue d'Alessio", "description": "Catalogage et transcription de documents diplomatiques." },
+        "p6": { "title": "L'église Saint-Nicolas", "description": "Histoire et conservation du mémorial de Skanderbeg." }
+      }
     },
     "video": {
       "title": "Vidéos",
+      "chapter": "Chapitre V",
       "description": "Regardez notre collection de vidéos"
     },
     "hero": {
@@ -129,6 +210,17 @@
       "message_error": "Erreur lors de l'envoi du message. Veuillez réessayer."
     }
   },
+  "pubblicazioni": {
+    "types": { "book": "Livre", "article": "Article", "research": "Recherche" },
+    "items": {
+      "p1": { "title": "Skanderbeg et la Ligue d'Alessio", "description": "Une étude approfondie sur Gjergj Kastrioti et la résistance albanaise du XVe siècle." },
+      "p2": { "title": "Fortifications médiévales de Lezha", "description": "Étude archéologique des murailles et des structures défensives." },
+      "p3": { "title": "La Mémoire de Lezha", "description": "Collection de documents historiques inédits provenant d'archives européennes." },
+      "p4": { "title": "Le Château sous la domination vénitienne", "description": "Analyse cartographique et archivistique de la période 1393-1479." },
+      "p5": { "title": "Manuscrits de la Ligue d'Alessio", "description": "Catalogage et transcription de documents diplomatiques." },
+      "p6": { "title": "L'Église Saint-Nicolas", "description": "Histoire et conservation du mémorial de Skanderbeg." }
+    }
+  },
   "content": {
     "not_found": "Article non trouvé"
   },
@@ -139,10 +231,18 @@
     "contact": "Nous Contacter",
     "social": "Suivez-nous"
   },
+  "preloader": {
+    "aquila": "Aigle"
+  },
   "validation": {
     "required": "Ce champ est obligatoire",
     "email_invalid": "Veuillez entrer une adresse email valide",
     "password_min": "Le mot de passe doit contenir au moins 8 caractères",
     "password_match": "Les mots de passe ne correspondent pas"
+  },
+  "consent": {
+    "analytics": "Analytics",
+    "marketing": "Marketing",
+    "preferences": "Préférences"
   }
 }

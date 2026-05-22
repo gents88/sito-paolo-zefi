@@ -5,7 +5,7 @@ export const adminRoutes: Routes = [
     path: '',
     loadComponent: () => import('./admin-layout.component').then(m => m.AdminLayoutComponent),
     children: [
-      { path: '', loadComponent: () => import('./dashboard.component').then(m => m.AdminDashboardComponent) },
+      { path: '', loadComponent: () => import('./dashboard/main/dashboard-main.component').then(m => m.DashboardMainComponent) },
     { path: 'articles', loadComponent: () => import('./articles/articles-list.component').then(m => m.AdminArticlesListComponent) },
     { path: 'articles/new', loadComponent: () => import('./articles/article-form.component').then(m => m.AdminArticleFormComponent) },
     { path: 'articles/:id/edit', loadComponent: () => import('./articles/article-form.component').then(m => m.AdminArticleFormComponent) },

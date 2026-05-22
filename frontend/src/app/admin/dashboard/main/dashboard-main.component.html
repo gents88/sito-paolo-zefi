@@ -1,0 +1,129 @@
+<div class="admin-page container">
+
+  <div *ngIf="actionMessageKey" class="dashboard-feedback" aria-live="polite">
+    <mat-icon>check_circle</mat-icon>
+    <span>{{ actionMessageKey | translate }}</span>
+  </div>
+
+  <section *ngIf="loading" class="dashboard-loading card" aria-live="polite">
+    <div class="dashboard-loading__spinner" aria-hidden="true">
+      <mat-icon class="spin">sync</mat-icon>
+    </div>
+    <h2>{{ 'admin.dashboard' | translate }}</h2>
+    <p class="text-muted">{{ 'common.loading' | translate }}</p>
+  </section>
+
+  <ng-container *ngIf="!loading">
+
+    <div class="dashboard-toolbar">
+      <span *ngIf="lastLoadedAt" class="dashboard-toolbar__updated text-muted">
+        <mat-icon>update</mat-icon>
+        {{ 'admin.last_updated' | translate }}: {{ lastLoadedAt | date:'HH:mm:ss' }}
+      </span>
+      <button type="button" class="chat-load-btn" (click)="loadData()">
+        <mat-icon>refresh</mat-icon>
+        {{ 'admin.refresh_data' | translate }}
+      </button>
+    </div>
+
+    <!-- Stats Section -->
+    <app-dashboard-stats [stats]="stats"></app-dashboard-stats>
+
+    <!-- Analytics Section -->
+    <app-dashboard-analytics
+      [contactBars]="contactBars"
+      [visitBars]="visitBars"
+      [totalViews]="totalViews"
+      [uniqueVisitors]="uniqueVisitors"
+      [publishedPosts]="publishedPosts"
+      [draftPosts]="draftPosts"
+      [topPosts]="topPosts">
+    </app-dashboard-analytics>
+
+    <!-- Consent Section -->
+    <div class="analytics-grid">
+      <section class="analytics-card card">
+        <div class="analytics-card__header">
+          <div>
+            <h2>{{ 'admin.consent.title' | translate }}</h2>
+            <p class="text-muted">{{ 'admin.consent.desc' | translate }}</p>
+          </div>
+          <mat-icon>gavel</mat-icon>
+        </div>
+
+        <div class="consent-summary">
+          <div class="consent-item">
+            <strong>{{ consentTotal }}</strong>
+            <span class="text-muted">{{ 'admin.consent.total' | translate }}</span>
+          </div>
+          <div class="consent-item">
+            <strong>{{ (consentAnalyticsRate * 100) | number:'1.0-0' }}%</strong>
+            <span class="text-muted">{{ 'consent.analytics' | translate }}</span>
+          </div>
+          <div class="consent-item">
+            <strong>{{ (consentMarketingRate * 100) | number:'1.0-0' }}%</strong>
+            <span class="text-muted">{{ 'consent.marketing' | translate }}</span>
+          </div>
+        </div>
+        <button type="button" class="btn" (click)="loadData()">{{ 'admin.refresh_data' | translate }}</button>
+      </section>
+    </div>
+
+    <!-- Quick links -->
+    <h2 class="section-label">{{ 'admin.quick_actions' | translate }}</h2>
+    <div class="quick-links">
+      <a *ngFor="let link of quickLinks; trackBy: trackByLabel" [routerLink]="link.route" class="quick-link card">
+        <mat-icon>{{ link.icon }}</mat-icon>
+        <span>{{ link.labelKey | translate }}</span>
+        <mat-icon class="arrow">arrow_forward</mat-icon>
+      </a>
+    </div>
+
+    <!-- Contacts Section -->
+    <app-dashboard-contacts
+      [recentContacts]="recentContacts"
+      [unreadCount]="unreadCount"
+      (contactOpened)="openContact($event)">
+    </app-dashboard-contacts>
+
+    <!-- Chat Section -->
+    <app-dashboard-chat [todaySessions]="todaySessions"></app-dashboard-chat>
+
+    <!-- Utility Section -->
+    <app-dashboard-utility
+      [systemHealth]="systemHealth"
+      [systemDetails]="systemDetails"
+      [unreadCount]="unreadCount">
+    </app-dashboard-utility>
+
+    <!-- Logout Section -->
+    <section class="admin-actions card">
+      <div>
+        <h2>{{ 'admin.logout' | translate }}</h2>
+        <p class="text-muted">{{ 'admin.logout_desc' | translate }}</p>
+      </div>
+
+      <button mat-stroked-button color="warn" class="logout-btn" [disabled]="logoutLoading" (click)="logout()">
+        <mat-icon [class.spin]="logoutLoading">{{ logoutLoading ? 'sync' : 'logout' }}</mat-icon>
+        {{ logoutLoading ? ('common.loading' | translate) : ('admin.logout' | translate) }}
+      </button>
+    </section>
+
+  </ng-container>
+
+  <!-- Contact modal placeholder -->
+  <div *ngIf="selectedContact" class="contact-modal-backdrop" (click)="closeContact()" aria-hidden="true"></div>
+  <section *ngIf="selectedContact" class="contact-modal card" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title">
+    <div class="contact-modal__header">
+      <div>
+        <p class="text-muted">{{ selectedContact.email }}</p>
+        <h2 id="contact-modal-title">{{ selectedContact.subject }}</h2>
+      </div>
+      <button type="button" class="contact-modal__close" (click)="closeContact()" aria-label="Chiudi messaggio">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="contact-modal__body">{{ selectedContact.message }}</div>
+  </section>
+
+</div>

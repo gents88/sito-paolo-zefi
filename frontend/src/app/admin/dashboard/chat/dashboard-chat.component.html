@@ -1,0 +1,49 @@
+<h2 class="section-label">{{ 'admin.chat_sessions_section' | translate }}</h2>
+<div class="analytics-grid adv-bottom-grid">
+  <section class="analytics-card card" style="grid-column: 1 / -1;">
+    <div class="analytics-card__header">
+      <div>
+        <h2>{{ 'admin.chat_sessions_today' | translate }}</h2>
+        <p class="text-muted">{{ 'admin.chat_sessions_today_desc' | translate }}</p>
+      </div>
+      <button type="button" class="chat-load-btn" [disabled]="loadingTodaySessions" (click)="loadTodaySessions()">
+        <mat-icon [class.spin]="loadingTodaySessions">{{ loadingTodaySessions ? 'sync' : 'refresh' }}</mat-icon>
+        {{ loadingTodaySessions ? ('common.loading' | translate) : ('admin.chat_sessions_load' | translate) }}
+        <span *ngIf="!loadingTodaySessions && todaySessions.length > 0" class="chat-count-badge">{{ todaySessions.length }}</span>
+      </button>
+    </div>
+
+    <p *ngIf="!todaySessions.length && !loadingTodaySessions" class="text-muted" style="margin-top:0.5rem;">{{ 'admin.chat_sessions_empty' | translate }}</p>
+
+    <div *ngIf="todaySessions.length" class="chat-session-list">
+      <div *ngFor="let session of todaySessions" class="chat-session-row" [class.chat-session-row--open]="expandedSessionId === session.sessionId">
+        <button type="button" class="chat-session-header" (click)="toggleSession(session.sessionId)">
+          <div class="chat-session-meta">
+            <mat-icon class="chat-session-icon">chat_bubble_outline</mat-icon>
+            <div class="chat-session-info">
+              <span class="chat-session-preview">{{ sessionPreview(session) }}</span>
+              <span class="text-muted chat-session-time">{{ session.lastActivity | date:'HH:mm' }} &nbsp;·&nbsp; {{ session.messageCount }} {{ 'admin.chat_messages_count' | translate }}</span>
+            </div>
+          </div>
+          <mat-icon class="chat-session-chevron">{{ expandedSessionId === session.sessionId ? 'expand_less' : 'expand_more' }}</mat-icon>
+        </button>
+
+        <div *ngIf="expandedSessionId === session.sessionId" class="chat-thread">
+          <div *ngFor="let msg of session.messages; let i = index" class="chat-bubble-row" [class.chat-bubble-row--user]="msg.role === 'user'">
+            <div class="chat-bubble" [class.chat-bubble--user]="msg.role === 'user'" [class.chat-bubble--bot]="msg.role === 'assistant'">
+              <span class="chat-bubble__role text-muted">{{ msg.role === 'user' ? '👤' : '🤖' }}</span>
+              <span class="chat-bubble__text">{{ msg.content }}</span>
+              <span class="chat-bubble__time text-muted">{{ msg.timestamp | date:'HH:mm:ss' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="todaySessionsTotalPages > 1" class="chat-pagination">
+        <button type="button" class="chat-load-btn" [disabled]="todaySessionsPage <= 1 || loadingTodaySessions" (click)="loadTodaySessions(todaySessionsPage - 1)"><mat-icon>chevron_left</mat-icon></button>
+        <span class="text-muted" style="font-size:0.82rem;">{{ todaySessionsPage }} / {{ todaySessionsTotalPages }}</span>
+        <button type="button" class="chat-load-btn" [disabled]="todaySessionsPage >= todaySessionsTotalPages || loadingTodaySessions" (click)="loadTodaySessions(todaySessionsPage + 1)"><mat-icon>chevron_right</mat-icon></button>
+      </div>
+    </div>
+  </section>
+</div>

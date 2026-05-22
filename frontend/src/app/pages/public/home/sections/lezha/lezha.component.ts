@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { ContentService } from '@core/services/content.service';
 import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,9 +13,11 @@ import { Router } from '@angular/router';
   templateUrl: './lezha.component.html',
   styleUrls: ['./lezha.component.scss'],
 })
-export class LezhaComponent implements OnInit {
+export class LezhaComponent implements OnInit, OnDestroy {
   stories: any[] = [];
   timelinePoints: Array<{ year: string; label: string }> = [];
+  fallbackStoriesList: any[] = [];
+  private langSub: Subscription | null = null;
 
   constructor(private contentService: ContentService, private translate: TranslateService, private router: Router) {}
 
@@ -30,14 +33,17 @@ export class LezhaComponent implements OnInit {
         if (items && items.length) {
           this.timelinePoints = items.map((it: any) => ({ year: it.year, label: it.title || it.label || it.name }));
         } else {
-          this.timelinePoints = this.getLocaleFallback();
+          this.buildLocaleFallback();
         }
       },
       error: (err) => {
         console.error('Error loading medieval timeline:', err);
-        this.timelinePoints = this.getLocaleFallback();
+        this.buildLocaleFallback();
       }
     });
+
+    // rebuild when language changes
+    this.langSub = this.translate.onLangChange.subscribe(() => this.buildLocaleFallback());
   }
 
   openOrDownload(story: any) {
@@ -97,35 +103,48 @@ export class LezhaComponent implements OnInit {
     }
   }
 
-  private getLocaleFallback() {
-    const lang = this.translate.currentLang || this.translate.getDefaultLang() || 'it';
-    if (lang.startsWith('en')) return this.englishTimeline;
-    return this.italianTimeline;
+  private buildLocaleFallback() {
+    const keys: string[] = [];
+    this.timelineDefs.forEach(d => keys.push(`sections.lezha.timeline.${d.id}.label`));
+    this.storyDefs.forEach(d => {
+      keys.push(`sections.lezha.stories.${d.id}.title`);
+      keys.push(`sections.lezha.stories.${d.id}.description`);
+    });
+
+    this.translate.get(keys).subscribe(res => {
+      this.timelinePoints = this.timelineDefs.map(d => ({ year: d.year, label: res[`sections.lezha.timeline.${d.id}.label`] || '' }));
+      this.fallbackStoriesList = this.storyDefs.map((d, i) => ({ id: i + 1, icon: d.icon, era: d.era, title: res[`sections.lezha.stories.${d.id}.title`] || '', description: res[`sections.lezha.stories.${d.id}.description`] || '' }));
+    });
   }
 
   // Fallback data
-  fallbackStories = [
-    { id: 1, icon: 'fa-solid fa-fort-awesome', era: 'III sec. a.C.', title: 'Lissus, la Fortezza Illira', description: 'La città antica fondata dai Greci, fortezza strategica del Mare Adriatico' },
-    { id: 2, icon: 'fa-solid fa-chess-rook', era: '1393', title: 'Il Dominio Veneziano', description: 'Lezha sotto il dominio della Repubblica di Venezia, centro di commercio e potere' },
-    { id: 3, icon: 'fa-solid fa-khanda', era: '2 Marzo 1444', title: 'La Lega di Alessio', description: 'Il patto storico che unì i principi albanesi contro l\'Impero Ottomano' },
-    { id: 4, icon: 'fa-solid fa-shield-halved', era: '1444-1468', title: 'L\'Era di Skanderbeg', description: 'La resistenza gloriosa guidata da Gjergj Kastrioti Skanderbeg contro gli Ottomani' },
-    { id: 5, icon: 'fa-solid fa-cross', era: '17 Gennaio 1468', title: 'La Tomba dell\'Eroe', description: 'Il sepolcro di Skanderbeg nella chiesa di San Nicola, monumento della memoria' },
-    { id: 6, icon: 'fa-solid fa-mountain-sun', era: 'Oggi', title: 'Il Castello di Lezha', description: 'Le rovine del castello raccontano storie di gloria, sacrificio e resilienza' }
+  // Definitions for fallback stories and timeline; localized text comes from i18n JSON
+  private storyDefs = [
+    { id: 's1', icon: 'fa-solid fa-fort-awesome', era: 'III sec. a.C.' },
+    { id: 's2', icon: 'fa-solid fa-chess-rook', era: '1393' },
+    { id: 's3', icon: 'fa-solid fa-khanda', era: '2 Marzo 1444' },
+    { id: 's4', icon: 'fa-solid fa-shield-halved', era: '1444-1468' },
+    { id: 's5', icon: 'fa-solid fa-cross', era: '17 Gennaio 1468' },
+    { id: 's6', icon: 'fa-solid fa-mountain-sun', era: 'Oggi' }
   ];
 
-  italianTimeline = [
-    { year: '385 a.C.', label: 'Fondazione di Lissus' },
-    { year: '1393', label: 'Dominio Veneziano' },
-    { year: '1444', label: 'Lega di Alessio' },
-    { year: '1468', label: 'Morte di Skanderbeg' },
-    { year: '1912', label: 'Indipendenza Albanese' },
+  private timelineDefs = [
+    { id: 't1', year: '385 a.C.' },
+    { id: 't2', year: '1393' },
+    { id: 't3', year: '1444' },
+    { id: 't4', year: '1468' },
+    { id: 't5', year: '1912' }
   ];
 
-  englishTimeline = [
-    { year: '385 BC', label: 'Foundation of Lissus' },
-    { year: '1393', label: 'Venetian Dominion' },
-    { year: '1444', label: 'League of Alessio' },
-    { year: '1468', label: 'Death of Skanderbeg' },
-    { year: '1912', label: 'Albanian Independence' },
-  ];
+  // Expose localized fallback data
+  get fallbackStories() {
+    return this.fallbackStoriesList;
+  }
+
+  ngOnDestroy(): void {
+    if (this.langSub) {
+      this.langSub.unsubscribe();
+      this.langSub = null;
+    }
+  }
 }

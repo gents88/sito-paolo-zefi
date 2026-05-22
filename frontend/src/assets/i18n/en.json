@@ -1,5 +1,6 @@
 {
   "common": {
+    "id": "ID",
     "login": "Login",
     "logout": "Logout",
     "dashboard": "Dashboard",
@@ -62,11 +63,73 @@
   },
   "admin": {
     "title": "Admin Dashboard",
+    "dashboard": "Dashboard",
+    "articles": "Articles",
     "users": "Users",
     "settings": "Settings",
     "logout_button": "Logout",
     "profile": "Profile",
-    "back_home": "Back to Home"
+    "back_home": "Back to Home",
+    "books": { "new": "New Book" },
+    "cards": { "articles": "Articles", "books": "Books", "videos": "Videos" },
+    "videos": { "title": "Videos", "new": "New Video" },
+    "status": "Status",
+    "video": { "title": "Title", "youtube_url": "YouTube URL", "description": "Description" },
+    "book": { "title": "Title", "author": "Author", "description": "Description" },
+    "article": { "title": "Title", "subtitle": "Subtitle", "content": "Content" },
+    "categories": { "new": "New Category" },
+    "table": { "title": "Title", "name": "Name", "actions": "Actions" },
+    "category": { "name": "Name", "slug": "Slug" },
+    "refresh_data": "Refresh Data",
+    "last_updated": "Last updated",
+    "logout": "Logout",
+    "logout_desc": "Sign out from the admin panel",
+    "recent_contacts_chart": "Recent Messages",
+    "last_7_days": "Last 7 days",
+    "visits_chart": "Visits Chart",
+    "public_traffic": "Public Traffic",
+    "visits": "Visits",
+    "visitors": "Visitors",
+    "content_mix": "Content Mix",
+    "content_status": "Content Status",
+    "published": "Published",
+    "drafts": "Drafts",
+    "top_posts_title": "Top Posts",
+    "top_posts_desc_card": "Most viewed posts",
+    "top_posts_empty": "No posts available",
+    "consent": {
+      "title": "User Consents",
+      "desc": "Consent Statistics",
+      "total": "Total"
+    },
+    "quick_actions": "Quick Actions",
+    "quick_articles": "New Articles",
+    "quick_users": "Manage Users",
+    "recent_activity": "Recent Activity",
+    "select_all": "Select All",
+    "selected": "selected",
+    "delete_selected": "Delete Selected",
+    "delete_sweep": "Delete",
+    "new_badge": "NEW",
+    "chat_sessions_section": "Chat Today",
+    "chat_sessions_today": "Chat Sessions Today",
+    "chat_sessions_today_desc": "Active conversations",
+    "chat_sessions_load": "Load Sessions",
+    "chat_sessions_empty": "No sessions today",
+    "chat_messages_count": "messages",
+    "utility_section": "Utility",
+    "utility_deployment": "Deployment",
+    "utility_deployment_desc": "Server info",
+    "utility_security": "Security",
+    "utility_security_desc": "Security status",
+    "utility_operations": "Operations",
+    "utility_operations_desc": "System actions",
+    "system_status": "System Status",
+    "system_version": "Version",
+    "system_env": "Environment",
+    "export_csv": "Export CSV",
+    "reset_monthly_stats": "Reset Monthly Stats",
+    "unread_contacts": "Unread Messages"
   },
   "sections": {
     "biografia": {
@@ -85,7 +148,33 @@
       "publications": "Publications",
       "conferences": "Conferences",
       "showMore": "Show more",
-      "showLess": "Show less"
+      "showLess": "Show less",
+      "timeline": {
+        "t1": {
+          "title": "Birth in Lezha",
+          "description": "Paulin Zefi is born in the historic town of Lezha, into a family that has preserved oral traditions for generations."
+        },
+        "t2": {
+          "title": "Degree in Medieval History",
+          "description": "He graduates from the University of Tirana with a thesis on the League of Alessio and the 15th-century Albanian resistance."
+        },
+        "t3": {
+          "title": "Early Studies on Lezha Castle",
+          "description": "He begins a decade-long research project on Lezha's medieval fortifications and their historical evolution."
+        },
+        "t4": {
+          "title": "Curator of the Skanderbeg Memorial",
+          "description": "He takes on the role of historical consultant for the conservation of the Skanderbeg Memorial at the Church of Saint Nicholas."
+        },
+        "t5": {
+          "title": "International Recognition",
+          "description": "His research gains international visibility, with collaborations across Italian, Austrian and Turkish universities."
+        },
+        "t6": {
+          "title": "Keeper of Memory",
+          "description": "He continues his outreach work, public lectures and mentorship of young Albanian historians."
+        }
+      }
     },
     "lezha": {
       "chapter": "Chapter II",
@@ -93,7 +182,22 @@
       "description": "Explore Lezha's history and culture",
       "subtitle": "Three thousand years of history, two centuries of glory, a glorious destiny",
       "quote": "Lezha is not just a city, it is the heart of Albanian resistance against Ottoman oppression.",
-      "quote_author": "— Paulin Zefi"
+      "quote_author": "— Paulin Zefi",
+      "timeline": {
+        "t1": { "label": "Foundation of Lissus" },
+        "t2": { "label": "Venetian Dominion" },
+        "t3": { "label": "League of Alessio" },
+        "t4": { "label": "Death of Skanderbeg" },
+        "t5": { "label": "Albanian Independence" }
+      },
+      "stories": {
+        "s1": { "title": "Lissus, the Illyrian Fortress", "description": "The ancient city founded by the Greeks, a strategic stronghold of the Adriatic Sea" },
+        "s2": { "title": "The Venetian Dominion", "description": "Lezha under the rule of the Republic of Venice, a center of trade and power" },
+        "s3": { "title": "The League of Alessio", "description": "The historic pact that united Albanian princes against the Ottoman Empire" },
+        "s4": { "title": "The Age of Skanderbeg", "description": "The glorious resistance led by Gjergj Kastrioti Skanderbeg against the Ottomans" },
+        "s5": { "title": "The Hero's Tomb", "description": "Skanderbeg's tomb at the Church of Saint Nicholas, a monument of memory" },
+        "s6": { "title": "Lezha Castle", "description": "The castle ruins tell stories of glory, sacrifice and resilience" }
+      }
     },
     "galleria": {
       "chapter": "Chapter III",
@@ -103,7 +207,16 @@
     "pubblicazioni": {
       "chapter": "Chapter IV",
       "title": "Publications",
-      "description": "Read Paulin Zefi's publications"
+      "description": "Read Paulin Zefi's publications",
+      "types": { "book": "Book", "article": "Article", "research": "Research" },
+      "items": {
+        "p1": { "title": "Skanderbeg and the League of Alessio", "description": "An in-depth study on Gjergj Kastrioti and the 15th-century Albanian resistance." },
+        "p2": { "title": "Medieval Fortifications of Lezha", "description": "Archaeological study of the walls and defensive structures." },
+        "p3": { "title": "The Memory of Lezha", "description": "Collection of previously unpublished historical documents from European archives." },
+        "p4": { "title": "The Castle under Venetian Rule", "description": "Cartographic and archival analysis of the period 1393-1479." },
+        "p5": { "title": "Manuscripts of the League of Alessio", "description": "Cataloging and transcription of diplomatic documents." },
+        "p6": { "title": "The Church of Saint Nicholas", "description": "History and conservation of Skanderbeg's memorial." }
+      }
     },
     "video": {
       "chapter": "Chapter V",
@@ -115,7 +228,20 @@
       "discover_story": "Discover the story",
       "publications": "Publications",
       "contacts": "Contacts",
-      "scroll": "Scroll"
+      "scroll": "Scroll",
+      "eyebrow": "MCDXLIV · LEZHA",
+      "toggle_audio": "Toggle ambient audio"
+    },
+    "pubblicazioni": {
+      "types": { "book": "Book", "article": "Article", "research": "Research" },
+      "items": {
+        "p1": { "title": "Skanderbeg and the League of Alessio", "description": "An in-depth study on Gjergj Kastrioti and the 15th-century Albanian resistance." },
+        "p2": { "title": "Medieval Fortifications of Lezha", "description": "Archaeological study of the walls and defensive structures." },
+        "p3": { "title": "The Memory of Lezha", "description": "Collection of previously unpublished historical documents from European archives." },
+        "p4": { "title": "The Castle under Venetian Rule", "description": "Cartographic and archival analysis of the period 1393-1479." },
+        "p5": { "title": "Manuscripts of the League of Alessio", "description": "Cataloging and transcription of diplomatic documents." },
+        "p6": { "title": "The Church of Saint Nicholas", "description": "History and conservation of Skanderbeg's memorial." }
+      }
     },
     "contatti": {
       "chapter": "Chapter VI",
@@ -142,10 +268,18 @@
     "contact": "Contact Us",
     "social": "Follow us"
   },
+  "preloader": {
+    "aquila": "Eagle"
+  },
   "validation": {
     "required": "This field is required",
     "email_invalid": "Please enter a valid email",
     "password_min": "Password must be at least 8 characters",
     "password_match": "Passwords do not match"
+  },
+  "consent": {
+    "analytics": "Analytics",
+    "marketing": "Marketing",
+    "preferences": "Preferences"
   }
 }

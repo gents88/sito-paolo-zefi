@@ -1,0 +1,74 @@
+<h2 class="section-label">{{ 'admin.utility_section' | translate }}</h2>
+<mat-accordion class="utility-accordion" multi>
+
+  <!-- Deployment -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon class="utility-panel-icon">dns</mat-icon>
+        {{ 'admin.utility_deployment' | translate }}
+      </mat-panel-title>
+      <mat-panel-description>{{ 'admin.utility_deployment_desc' | translate }}</mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="utility-kv-grid">
+      <div class="utility-kv">
+        <span class="text-muted">{{ 'admin.system_status' | translate }}</span>
+        <strong [class.utility-status--ok]="systemHealth?.ok" [class.utility-status--warn]="!systemHealth?.ok">{{ systemHealth?.ok ? 'OK' : '—' }}</strong>
+      </div>
+      <div class="utility-kv">
+        <span class="text-muted">{{ 'admin.system_version' | translate }}</span>
+        <strong>{{ systemDetails?.version || systemHealth?.version || '—' }}</strong>
+      </div>
+      <div class="utility-kv">
+        <span class="text-muted">{{ 'admin.system_env' | translate }}</span>
+        <strong>{{ systemDetails?.environment || systemHealth?.environment || '—' }}</strong>
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+  <!-- Security -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon class="utility-panel-icon">shield</mat-icon>
+        {{ 'admin.utility_security' | translate }}
+      </mat-panel-title>
+      <mat-panel-description>{{ 'admin.utility_security_desc' | translate }}</mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="utility-stack">
+      <div class="utility-row">
+        <span class="text-muted">{{ 'admin.unread_contacts' | translate }}</span>
+        <strong>{{ unreadCount }}</strong>
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+  <!-- Quick Actions -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon class="utility-panel-icon">build_circle</mat-icon>
+        {{ 'admin.utility_operations' | translate }}
+      </mat-panel-title>
+      <mat-panel-description>{{ 'admin.utility_operations_desc' | translate }}</mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="utility-actions">
+      <button type="button" class="utility-action-btn" (click)="onLoadData()">
+        <mat-icon>refresh</mat-icon>
+        {{ 'admin.refresh_data' | translate }}
+      </button>
+      <button type="button" class="utility-action-btn" (click)="onDownloadCsv()">
+        <mat-icon>download</mat-icon>
+        {{ 'admin.export_csv' | translate }}
+      </button>
+      <button type="button" class="utility-action-btn" (click)="onResetStats()">
+        <mat-icon>restart_alt</mat-icon>
+        {{ 'admin.reset_monthly_stats' | translate }}
+      </button>
+    </div>
+  </mat-expansion-panel>
+
+</mat-accordion>

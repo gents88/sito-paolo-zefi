@@ -4,19 +4,20 @@ import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angula
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { TranslateModule } from '@ngx-translate/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { AdminApiService } from '../../core/services/admin-api.service';
 
 @Component({
   standalone: true,
   selector: 'app-admin-book-form',
-  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, RouterModule, TranslateModule],
   template: `
     <form [formGroup]="form" (ngSubmit)="save()">
-      <mat-form-field appearance="fill"><mat-label>Title</mat-label><input matInput formControlName="title" /></mat-form-field>
-      <mat-form-field appearance="fill"><mat-label>Author</mat-label><input matInput formControlName="author" /></mat-form-field>
-      <mat-form-field appearance="fill"><mat-label>Description</mat-label><textarea matInput formControlName="description" rows="6"></textarea></mat-form-field>
-      <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Save</button>
+      <mat-form-field appearance="fill"><mat-label>{{ 'admin.book.title' | translate }}</mat-label><input matInput formControlName="title" /></mat-form-field>
+      <mat-form-field appearance="fill"><mat-label>{{ 'admin.book.author' | translate }}</mat-label><input matInput formControlName="author" /></mat-form-field>
+      <mat-form-field appearance="fill"><mat-label>{{ 'admin.book.description' | translate }}</mat-label><textarea matInput formControlName="description" rows="6"></textarea></mat-form-field>
+      <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">{{ 'common.save' | translate }}</button>
     </form>
   `,
 })

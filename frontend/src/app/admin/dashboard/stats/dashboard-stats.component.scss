@@ -1,0 +1,39 @@
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+.stat-card {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.stat-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-card__content {
+  flex: 1;
+}
+
+.stat-mini-chart {
+  display: flex;
+  gap: 2px;
+}
+
+.stat-mini-chart__bar {
+  display: block;
+  width: 6px;
+  border-radius: 2px;
+}

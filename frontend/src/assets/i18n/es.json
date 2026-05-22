@@ -1,5 +1,6 @@
 {
   "common": {
+    "id": "ID",
     "login": "Iniciar sesión",
     "logout": "Cerrar sesión",
     "dashboard": "Panel de control",
@@ -66,7 +67,63 @@
     "settings": "Configuración",
     "logout_button": "Cerrar sesión",
     "profile": "Perfil",
-    "back_home": "Volver a inicio"
+    "back_home": "Volver a inicio",
+    "cards": { "articles": "Artículos", "books": "Libros", "videos": "Vídeos" },
+    "videos": { "title": "Vídeos", "new": "Nuevo Vídeo" },
+    "status": "Estado",
+    "video": { "title": "Título", "youtube_url": "URL de YouTube", "description": "Descripción" },
+    "book": { "title": "Título", "author": "Autor", "description": "Descripción" },
+    "article": { "title": "Título", "subtitle": "Subtítulo", "content": "Contenido" },
+    "refresh_data": "Actualizar Datos",
+    "last_updated": "Última actualización",
+    "logout": "Cerrar sesión",
+    "logout_desc": "Cierre sesión del panel de administración",
+    "recent_contacts_chart": "Mensajes Recientes",
+    "last_7_days": "Últimos 7 días",
+    "visits_chart": "Gráfico de Visitas",
+    "public_traffic": "Tráfico Público",
+    "visits": "Visitas",
+    "visitors": "Visitantes",
+    "content_mix": "Mezcla de Contenido",
+    "content_status": "Estado del Contenido",
+    "published": "Publicados",
+    "drafts": "Borradores",
+    "top_posts_title": "Top Posts",
+    "top_posts_desc_card": "Posts más vistos",
+    "top_posts_empty": "No hay posts disponibles",
+    "consent": {
+      "title": "Consentimientos de Usuario",
+      "desc": "Estadísticas de Consentimiento",
+      "total": "Total"
+    },
+    "quick_actions": "Acciones Rápidas",
+    "quick_articles": "Nuevos Artículos",
+    "quick_users": "Gestionar Usuarios",
+    "recent_activity": "Actividad Reciente",
+    "select_all": "Seleccionar Todo",
+    "selected": "seleccionados",
+    "delete_selected": "Eliminar Seleccionados",
+    "delete_sweep": "Eliminar",
+    "new_badge": "NUEVO",
+    "chat_sessions_section": "Chat Hoy",
+    "chat_sessions_today": "Sesiones de Chat Hoy",
+    "chat_sessions_today_desc": "Conversaciones activas",
+    "chat_sessions_load": "Cargar Sesiones",
+    "chat_sessions_empty": "Sin sesiones hoy",
+    "chat_messages_count": "mensajes",
+    "utility_section": "Utilidad",
+    "utility_deployment": "Implementación",
+    "utility_deployment_desc": "Información del servidor",
+    "utility_security": "Seguridad",
+    "utility_security_desc": "Estado de seguridad",
+    "utility_operations": "Operaciones",
+    "utility_operations_desc": "Acciones del sistema",
+    "system_status": "Estado del Sistema",
+    "system_version": "Versión",
+    "system_env": "Entorno",
+    "export_csv": "Exportar CSV",
+    "reset_monthly_stats": "Restablecer Estadísticas Mensuales",
+    "unread_contacts": "Mensajes no Leídos"
   },
   "sections": {
     "biografia": {
@@ -90,7 +147,22 @@
       "description": "Explora la historia y cultura de Lezha",
       "subtitle": "Tres mil años de historia, dos siglos de gloria, un destino glorioso",
       "quote": "Lezha no es solo una ciudad, es el corazón de la resistencia albanesa contra la opresión otomana.",
-      "quote_author": "— Paulin Zefi"
+      "quote_author": "— Paulin Zefi",
+      "timeline": {
+        "t1": { "label": "Fundación de Lissus" },
+        "t2": { "label": "Dominio Veneciano" },
+        "t3": { "label": "Liga de Alessio" },
+        "t4": { "label": "Muerte de Skanderbeg" },
+        "t5": { "label": "Independencia Albanesa" }
+      },
+      "stories": {
+        "s1": { "title": "Lissus, la Fortaleza Iliria", "description": "La antigua ciudad fundada por los griegos, un bastión estratégico del mar Adriático" },
+        "s2": { "title": "El Dominio Veneciano", "description": "Lezha bajo el dominio de la República de Venecia, centro de comercio y poder" },
+        "s3": { "title": "La Liga de Alessio", "description": "El pacto histórico que unió a los príncipes albaneses contra el Imperio Otomano" },
+        "s4": { "title": "La Era de Skanderbeg", "description": "La gloriosa resistencia liderada por Gjergj Kastrioti Skanderbeg contra los otomanos" },
+        "s5": { "title": "La Tumba del Héroe", "description": "La tumba de Skanderbeg en la iglesia de San Nicolás, un monumento de memoria" },
+        "s6": { "title": "El Castillo de Lezha", "description": "Las ruinas del castillo cuentan historias de gloria, sacrificio y resiliencia" }
+      }
     },
     "galleria": {
       "title": "Galería",
@@ -100,7 +172,16 @@
     "pubblicazioni": {
       "title": "Publicaciones",
       "chapter": "Capítulo IV",
-      "description": "Lee las publicaciones de Paulin Zefi"
+      "description": "Lee las publicaciones de Paulin Zefi",
+      "types": { "book": "Libro", "article": "Artículo", "research": "Investigación" },
+      "items": {
+        "p1": { "title": "Skanderbeg y la Liga de Alessio", "description": "Un estudio en profundidad sobre Gjergj Kastrioti y la resistencia albanesa del siglo XV." },
+        "p2": { "title": "Fortificaciones medievales de Lezha", "description": "Estudio arqueológico de las murallas y las estructuras defensivas." },
+        "p3": { "title": "La Memoria de Lezha", "description": "Colección de documentos históricos inéditos de archivos europeos." },
+        "p4": { "title": "El Castillo bajo el dominio veneciano", "description": "Análisis cartográfico y archivístico del periodo 1393-1479." },
+        "p5": { "title": "Manuscritos de la Liga de Alessio", "description": "Catalogación y transcripción de documentos diplomáticos." },
+        "p6": { "title": "La Iglesia de San Nicolás", "description": "Historia y conservación del memorial de Skanderbeg." }
+      }
     },
     "video": {
       "title": "Vídeos",
@@ -129,6 +210,17 @@
       "message_error": "Error al enviar el mensaje. Por favor, inténtelo de nuevo."
     }
   },
+  "pubblicazioni": {
+    "types": { "book": "Libro", "article": "Artículo", "research": "Investigación" },
+    "items": {
+      "p1": { "title": "Skanderbeg y la Liga de Alessio", "description": "Un estudio en profundidad sobre Gjergj Kastrioti y la resistencia albanesa del siglo XV." },
+      "p2": { "title": "Fortificaciones medievales de Lezha", "description": "Estudio arqueológico de las murallas y las estructuras defensivas." },
+      "p3": { "title": "La Memoria de Lezha", "description": "Colección de documentos históricos inéditos de archivos europeos." },
+      "p4": { "title": "El Castillo bajo el dominio veneciano", "description": "Análisis cartográfico y archivístico del periodo 1393-1479." },
+      "p5": { "title": "Manuscritos de la Liga de Alessio", "description": "Catalogación y transcripción de documentos diplomáticos." },
+      "p6": { "title": "La Iglesia de San Nicolás", "description": "Historia y conservación del memorial de Skanderbeg." }
+    }
+  },
   "content": {
     "not_found": "Artículo no encontrado"
   },
@@ -139,10 +231,18 @@
     "contact": "Contáctenos",
     "social": "Síguenos"
   },
+  "preloader": {
+    "aquila": "Águila"
+  },
   "validation": {
     "required": "Este campo es obligatorio",
     "email_invalid": "Por favor, introduce un correo electrónico válido",
     "password_min": "La contraseña debe tener al menos 8 caracteres",
     "password_match": "Las contraseñas no coinciden"
+  },
+  "consent": {
+    "analytics": "Analytics",
+    "marketing": "Marketing",
+    "preferences": "Preferencias"
   }
 }

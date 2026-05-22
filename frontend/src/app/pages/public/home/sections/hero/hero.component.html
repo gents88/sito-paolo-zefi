@@ -35,7 +35,7 @@
   <div class="hero-content">
     <div class="hero-eyebrow">
       <span class="eyebrow-line"></span>
-      <span class="eyebrow-text">MCDXLIV · LEZHA</span>
+      <span class="eyebrow-text">{{ 'sections.hero.eyebrow' | translate }}</span>
       <span class="eyebrow-line"></span>
     </div>
 
@@ -66,12 +66,12 @@
     </div>
 
     <div class="hero-scroll-indicator">
-      <span>Scorri</span>
+      <span>{{ 'sections.hero.scroll' | translate }}</span>
       <div class="scroll-line"></div>
     </div>
   </div>
 
-  <button class="audio-toggle" [class.playing]="audio.isPlaying()" (click)="toggleAudio()" aria-label="Toggle audio">
+  <button class="audio-toggle" [class.playing]="audio.isPlaying()" (click)="toggleAudio()" [attr.aria-label]="'sections.hero.toggle_audio' | translate">
     <i [class]="audio.isPlaying() ? 'fa-solid fa-volume-high' : 'fa-solid fa-music'"></i>
   </button>
 </section>
