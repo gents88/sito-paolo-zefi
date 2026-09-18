@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
+import { AdminApiService } from '../../../core/services/admin-api.service';
 
 @Component({
   standalone: true,
@@ -11,9 +12,12 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrls: ['./dashboard-contacts.component.scss'],
 })
 export class DashboardContactsComponent {
-  @Input() recentContacts: any[] = [ { _id: 'c1', name: 'Paolo', email: 'paolo@example.com', subject: 'Info', message: 'Hello', createdAt: new Date(), read: false } ];
-  @Input() unreadCount = 1;
+  @Input() recentContacts: any[] = [];
+  @Input() unreadCount = 0;
   @Output() contactOpened = new EventEmitter<any>();
+  @Output() contactsDeleted = new EventEmitter<string[]>();
+
+  constructor(private api: AdminApiService) {}
 
   allSelected = false;
   selectedIds = new Set<string>();
@@ -39,11 +43,22 @@ export class DashboardContactsComponent {
   }
 
   deleteSelected(){
+    if (!this.anySelected) return;
+    const ids = Array.from(this.selectedIds);
     this.bulkDeleting = true;
-    setTimeout(()=>{
-      this.bulkDeleting = false;
-      this.selectedIds.clear();
-    }, 800);
+    this.api.deleteContacts(ids.map(Number)).subscribe({
+      next: () => {
+        this.bulkDeleting = false;
+        this.recentContacts = this.recentContacts.filter(c => !this.selectedIds.has(c._id));
+        this.selectedIds.clear();
+        this.allSelected = false;
+        this.contactsDeleted.emit(ids);
+      },
+      error: (err) => {
+        console.error('Error deleting contacts:', err);
+        this.bulkDeleting = false;
+      },
+    });
   }
 
   openContact(c: any){ this.contactOpened.emit(c); }

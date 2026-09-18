@@ -1,4 +1,12 @@
-<div class="analytics-grid">
+<div *ngIf="!available" class="analytics-unavailable card" role="status">
+  <mat-icon>info</mat-icon>
+  <div>
+    <strong>{{ 'admin.feature_unavailable_title' | translate }}</strong>
+    <p class="text-muted">{{ 'admin.feature_unavailable_desc' | translate }}</p>
+  </div>
+</div>
+
+<div class="analytics-grid" [class.analytics-grid--disabled]="!available">
   <!-- Contacts Chart -->
   <section class="analytics-card card">
     <div class="analytics-card__header">

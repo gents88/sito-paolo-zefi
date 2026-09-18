@@ -4,5 +4,6 @@ export * from './contact.service';
 export * from './publications.service';
 export * from './gallery.service';
 export * from './content.service';
+export * from './video.service';
 export * from './audio.service';
 export * from './theme.service';

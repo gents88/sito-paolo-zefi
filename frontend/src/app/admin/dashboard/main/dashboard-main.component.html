@@ -31,6 +31,7 @@
 
     <!-- Analytics Section -->
     <app-dashboard-analytics
+      [available]="analyticsAvailable"
       [contactBars]="contactBars"
       [visitBars]="visitBars"
       [totalViews]="totalViews"
@@ -41,7 +42,14 @@
     </app-dashboard-analytics>
 
     <!-- Consent Section -->
-    <div class="analytics-grid">
+    <div *ngIf="!consentAvailable" class="analytics-unavailable card" role="status">
+      <mat-icon>info</mat-icon>
+      <div>
+        <strong>{{ 'admin.feature_unavailable_title' | translate }}</strong>
+        <p class="text-muted">{{ 'admin.feature_unavailable_desc' | translate }}</p>
+      </div>
+    </div>
+    <div class="analytics-grid" [class.analytics-grid--disabled]="!consentAvailable">
       <section class="analytics-card card">
         <div class="analytics-card__header">
           <div>
@@ -65,7 +73,6 @@
             <span class="text-muted">{{ 'consent.marketing' | translate }}</span>
           </div>
         </div>
-        <button type="button" class="btn" (click)="loadData()">{{ 'admin.refresh_data' | translate }}</button>
       </section>
     </div>
 
@@ -87,7 +94,7 @@
     </app-dashboard-contacts>
 
     <!-- Chat Section -->
-    <app-dashboard-chat [todaySessions]="todaySessions"></app-dashboard-chat>
+    <app-dashboard-chat [available]="chatAvailable" [todaySessions]="todaySessions"></app-dashboard-chat>
 
     <!-- Utility Section -->
     <app-dashboard-utility

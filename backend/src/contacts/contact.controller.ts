@@ -1,13 +1,21 @@
 import {
-  Controller,
-  Post,
   Body,
+  Controller,
+  Delete,
+  Get,
   HttpCode,
   HttpStatus,
+  Param,
+  Patch,
+  Post,
+  UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
 import { ContactService } from './contact.service';
 import { CreateContactDto } from './dto/create-contact.dto';
+import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
+import { RolesGuard } from '../common/guards/roles.guard';
+import { Roles } from '../common/decorators/roles.decorator';
 
 @Controller('contacts')
 export class ContactController {
@@ -19,5 +27,33 @@ export class ContactController {
     @Body(ValidationPipe) createContactDto: CreateContactDto
   ) {
     return await this.contactService.sendMessage(createContactDto);
+  }
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('ADMIN')
+  @Get()
+  findAll() {
+    return this.contactService.findAll();
+  }
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('ADMIN')
+  @Patch(':id/read')
+  markRead(@Param('id') id: string) {
+    return this.contactService.markRead(Number(id), true);
+  }
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('ADMIN')
+  @Delete('bulk')
+  removeMany(@Body('ids') ids: number[]) {
+    return this.contactService.removeMany((ids || []).map(Number));
+  }
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('ADMIN')
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.contactService.remove(Number(id));
   }
 }

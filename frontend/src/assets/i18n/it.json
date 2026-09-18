@@ -97,6 +97,9 @@
     "top_posts_title": "Top Post",
     "top_posts_desc_card": "Post più visualizzati",
     "top_posts_empty": "Nessun post disponibile",
+    "no_chart_data": "Nessun dato disponibile",
+    "feature_unavailable_title": "Funzionalità non ancora disponibile",
+    "feature_unavailable_desc": "Questa sezione richiede un'integrazione non ancora implementata.",
     "consent": {
       "title": "Consensi Utenti",
       "desc": "Statistiche sui consensi",

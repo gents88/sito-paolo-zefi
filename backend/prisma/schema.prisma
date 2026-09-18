@@ -63,6 +63,16 @@ model Video {
   createdAt   DateTime @default(now())
 }
 
+model Contact {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  email     String
+  oggetto   String
+  messaggio String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
 enum Role {
   ADMIN
   USER

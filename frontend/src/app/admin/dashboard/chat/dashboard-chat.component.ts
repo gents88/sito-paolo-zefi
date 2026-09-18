@@ -11,22 +11,13 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrls: ['./dashboard-chat.component.scss'],
 })
 export class DashboardChatComponent {
-  @Input() todaySessions: any[] = [
-    { sessionId: 's1', lastActivity: new Date(), messageCount: 3, messages: [ { role: 'user', content: 'Hi', timestamp: new Date() }, { role: 'assistant', content: 'Hello', timestamp: new Date() } ] }
-  ];
+  @Input() available = true;
+  @Input() todaySessions: any[] = [];
 
   expandedSessionId: string | null = null;
-  loadingTodaySessions = false;
   todaySessionsPage = 1;
   todaySessionsTotalPages = 1;
 
   toggleSession(id: string){ this.expandedSessionId = this.expandedSessionId === id ? null : id; }
   sessionPreview(session: any){ return (session.messages?.[0]?.content ?? '').slice(0,40); }
-  loadTodaySessions(page = 1){
-    this.loadingTodaySessions = true;
-    setTimeout(()=>{
-      this.loadingTodaySessions = false;
-      this.todaySessionsPage = page;
-    }, 600);
-  }
 }

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AdminApiService {
-  base = '/api';
+  base = environment.apiUrl;
   constructor(private http: HttpClient) {}
 
   listArticles(opts: { page?: number; limit?: number; search?: string }): Observable<any> {
@@ -98,5 +99,27 @@ export class AdminApiService {
 
   deleteCategory(id: number) {
     return this.http.delete(`${this.base}/categories/${id}`);
+  }
+
+  // Stats
+  getStats(): Observable<{ articles: number; books: number; videos: number; unreadContacts: number; totalContacts: number }> {
+    return this.http.get<{ articles: number; books: number; videos: number; unreadContacts: number; totalContacts: number }>(`${this.base}/stats`);
+  }
+
+  // Contacts
+  listContacts(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.base}/contacts`);
+  }
+
+  markContactRead(id: number) {
+    return this.http.patch(`${this.base}/contacts/${id}/read`, {});
+  }
+
+  deleteContact(id: number) {
+    return this.http.delete(`${this.base}/contacts/${id}`);
+  }
+
+  deleteContacts(ids: number[]) {
+    return this.http.delete(`${this.base}/contacts/bulk`, { body: { ids } });
   }
 }

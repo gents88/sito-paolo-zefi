@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
+import { forkJoin } from 'rxjs';
+import { AdminApiService } from '../../../core/services/admin-api.service';
 import { DashboardStatsComponent } from '../stats/dashboard-stats.component';
 import { DashboardAnalyticsComponent } from '../analytics/dashboard-analytics.component';
 import { DashboardContactsComponent } from '../contacts/dashboard-contacts.component';
@@ -30,54 +32,41 @@ import { DashboardUtilityComponent } from '../utility/dashboard-utility.componen
   templateUrl: './dashboard-main.component.html',
   styleUrls: ['./dashboard-main.component.scss'],
 })
-export class DashboardMainComponent {
+export class DashboardMainComponent implements OnInit {
   loading = false;
   actionMessageKey = '';
   lastLoadedAt: Date | null = null;
 
-  // Stats
-  stats = [
-    { labelKey: 'admin.cards.articles', value: 12, miniBars: [20,40,60,30], icon: 'article', color: '#6366f1', route: ['/admin','articles'] },
-    { labelKey: 'admin.cards.books', value: 4, miniBars: [10,30,20], icon: 'book', color: '#f59e0b', route: ['/admin','books'] },
-    { labelKey: 'admin.cards.videos', value: 8, miniBars: [5,15,25], icon: 'ondemand_video', color: '#10b981', route: ['/admin','videos'] },
+  // Stats (real, from /stats)
+  stats: any[] = [
+    { labelKey: 'admin.cards.articles', value: 0, miniBars: [], icon: 'article', color: '#6366f1', route: ['/admin', 'articles'] },
+    { labelKey: 'admin.cards.books', value: 0, miniBars: [], icon: 'book', color: '#f59e0b', route: ['/admin', 'books'] },
+    { labelKey: 'admin.cards.videos', value: 0, miniBars: [], icon: 'ondemand_video', color: '#10b981', route: ['/admin', 'videos'] },
   ];
 
-  // Analytics
-  contactBars = [
-    { date: new Date(Date.now() - 6*86400000), value: 2 },
-    { date: new Date(Date.now() - 5*86400000), value: 4 },
-    { date: new Date(Date.now() - 4*86400000), value: 6 },
-    { date: new Date(Date.now() - 3*86400000), value: 3 },
-    { date: new Date(Date.now() - 2*86400000), value: 5 },
-    { date: new Date(Date.now() - 86400000), value: 7 },
-    { date: new Date(), value: 6 },
-  ];
-
-  visitBars = this.contactBars.map(b => ({ date: b.date, value: b.value * 12 }));
-  totalViews = 1240;
-  uniqueVisitors = 820;
-  publishedPosts = 42;
-  draftPosts = 7;
-  topPosts = [
-    { _id: '1', title: 'How to write clean code', slug: 'clean-code', viewCount: 420 },
-    { _id: '2', title: 'Angular best practices', slug: 'angular-best', viewCount: 312 },
-  ];
-
-  // Consent
-  consentTotal = 560;
-  consentAnalyticsRate = 0.62;
-  consentMarketingRate = 0.21;
+  // Analytics / Chat / Consent: no tracking or chat backend exists yet — panels render an "unavailable" state
+  analyticsAvailable = false;
+  chatAvailable = false;
+  consentAvailable = false;
+  contactBars: any[] = [];
+  visitBars: any[] = [];
+  totalViews = 0;
+  uniqueVisitors = 0;
+  publishedPosts = 0;
+  draftPosts = 0;
+  topPosts: any[] = [];
+  consentTotal = 0;
+  consentAnalyticsRate = 0;
+  consentMarketingRate = 0;
+  todaySessions: any[] = [];
 
   // Quick links
-  quickLinks = [ { route: ['/admin','articles'], icon: 'article', labelKey: 'admin.quick_articles' }, { route: ['/admin','users'], icon: 'people', labelKey: 'admin.quick_users' } ];
+  quickLinks = [{ route: ['/admin', 'articles'], icon: 'article', labelKey: 'admin.quick_articles' }];
 
-  // Contacts
-  recentContacts: any[] = [ { _id: 'c1', name: 'Paolo', email: 'paolo@example.com', subject: 'Info', message: 'Hello', createdAt: new Date(), read: false } ];
-  unreadCount = 1;
+  // Contacts (real, from /contacts)
+  recentContacts: any[] = [];
+  unreadCount = 0;
   selectedContact: any = null;
-
-  // Chat
-  todaySessions: any[] = [ { sessionId: 's1', lastActivity: new Date(), messageCount: 3, messages: [ { role: 'user', content: 'Hi', timestamp: new Date() }, { role: 'assistant', content: 'Hello', timestamp: new Date() } ] } ];
 
   // System
   systemHealth: any = { ok: true };
@@ -86,20 +75,59 @@ export class DashboardMainComponent {
   // Logout
   logoutLoading = false;
 
-  trackByLabel(index: number, item: any){ return item.labelKey ?? item.label ?? index; }
+  constructor(private api: AdminApiService) {}
 
-  loadData(){
-    this.loading = true;
-    setTimeout(()=>{
-      this.loading = false;
-      this.lastLoadedAt = new Date();
-      this.actionMessageKey = 'admin.data_refreshed';
-      setTimeout(()=> this.actionMessageKey = '', 3000);
-    }, 700);
+  ngOnInit(): void {
+    this.loadData();
   }
 
-  openContact(c: any){ this.selectedContact = c; }
-  closeContact(){ this.selectedContact = null; }
+  trackByLabel(index: number, item: any) { return item.labelKey ?? item.label ?? index; }
 
-  logout(){ this.logoutLoading = true; setTimeout(()=>{ this.logoutLoading = false; }, 1000); }
+  loadData() {
+    this.loading = true;
+    forkJoin({
+      stats: this.api.getStats(),
+      contacts: this.api.listContacts(),
+    }).subscribe({
+      next: ({ stats, contacts }) => {
+        this.stats[0].value = stats.articles;
+        this.stats[1].value = stats.books;
+        this.stats[2].value = stats.videos;
+        this.recentContacts = (contacts || []).map((c: any) => ({
+          _id: c.id,
+          name: c.nome,
+          email: c.email,
+          subject: c.oggetto,
+          message: c.messaggio,
+          createdAt: c.createdAt,
+          read: c.read,
+        }));
+        this.unreadCount = stats.unreadContacts;
+        this.loading = false;
+        this.lastLoadedAt = new Date();
+        this.actionMessageKey = 'admin.data_refreshed';
+        setTimeout(() => (this.actionMessageKey = ''), 3000);
+      },
+      error: (err) => {
+        console.error('Error loading dashboard data:', err);
+        this.loading = false;
+      },
+    });
+  }
+
+  openContact(c: any) {
+    this.selectedContact = c;
+    if (c?._id && !c.read) {
+      this.api.markContactRead(c._id).subscribe({
+        next: () => {
+          c.read = true;
+          this.unreadCount = Math.max(0, this.unreadCount - 1);
+        },
+        error: (err) => console.error('Error marking contact as read:', err),
+      });
+    }
+  }
+  closeContact() { this.selectedContact = null; }
+
+  logout() { this.logoutLoading = true; setTimeout(() => { this.logoutLoading = false; }, 1000); }
 }

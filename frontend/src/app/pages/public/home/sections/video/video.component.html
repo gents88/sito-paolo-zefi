@@ -6,36 +6,13 @@
   </div>
 
   <div class="video-grid reveal">
-    <div class="video-card featured">
+    <div class="video-card" *ngFor="let video of videos; let i = index" [class.featured]="i === 0">
       <div class="video-thumb">
-        <iframe src="https://www.youtube.com/embed/o3FuyrAlf3E?rel=0" title="Skanderbeg documentario" frameborder="0" allowfullscreen loading="lazy"></iframe>
+        <iframe [src]="video.embedUrl" [title]="video.title" frameborder="0" allowfullscreen loading="lazy"></iframe>
       </div>
       <div class="video-info">
-        <span class="video-tag">Documentario</span>
-        <h3>Skanderbeg e la Lega di Alessio</h3>
-        <p>Un viaggio nelle origini dell'unità albanese, dalla fortezza di Lezha alle pianure dove si combatté la resistenza ottomana.</p>
-      </div>
-    </div>
-
-    <div class="video-card">
-      <div class="video-thumb">
-        <iframe src="https://www.youtube.com/embed/EngW7tLk6R8?rel=0" title="Castello di Lezha" frameborder="0" allowfullscreen loading="lazy"></iframe>
-      </div>
-      <div class="video-info">
-        <span class="video-tag">Intervista</span>
-        <h3>Il Castello di Lezha</h3>
-        <p>Paulin Zefi racconta la storia millenaria della fortezza che domina la città.</p>
-      </div>
-    </div>
-
-    <div class="video-card">
-      <div class="video-thumb">
-        <iframe src="https://www.youtube.com/embed/Lzd3-WJfCwc?rel=0" title="Memoriale di Skanderbeg" frameborder="0" allowfullscreen loading="lazy"></iframe>
-      </div>
-      <div class="video-info">
-        <span class="video-tag">Conferenza</span>
-        <h3>Il Memoriale di San Nicola</h3>
-        <p>Storia della chiesa di San Nicola e del sepolcro di Gjergj Kastrioti Skanderbeg.</p>
+        <h3>{{ video.title }}</h3>
+        <p>{{ video.description }}</p>
       </div>
     </div>
   </div>

@@ -1,28 +1,35 @@
 import { Injectable, Logger } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateContactDto } from './dto/create-contact.dto';
 
 @Injectable()
 export class ContactService {
   private readonly logger = new Logger(ContactService.name);
 
-  async sendMessage(createContactDto: CreateContactDto) {
-    try {
-      // TODO: Invia email o salva nel database
-      this.logger.log(
-        `Nuovo messaggio da ${createContactDto.nome}: ${createContactDto.oggetto}`
-      );
+  constructor(private prisma: PrismaService) {}
 
-      // Per ora, ritorna un successo simulato
-      return {
-        success: true,
-        message: 'Messaggio ricevuto con successo. Risponderemo presto!',
-      };
-    } catch (error) {
-      this.logger.error('Errore durante l\'invio del messaggio:', error);
-      return {
-        success: false,
-        message: 'Errore durante l\'invio del messaggio.',
-      };
-    }
+  async sendMessage(createContactDto: CreateContactDto) {
+    await this.prisma.contact.create({ data: createContactDto });
+    this.logger.log(`Nuovo messaggio da ${createContactDto.nome}: ${createContactDto.oggetto}`);
+    return {
+      success: true,
+      message: 'Messaggio ricevuto con successo. Risponderemo presto!',
+    };
+  }
+
+  findAll() {
+    return this.prisma.contact.findMany({ orderBy: { createdAt: 'desc' } });
+  }
+
+  markRead(id: number, read = true) {
+    return this.prisma.contact.update({ where: { id }, data: { read } });
+  }
+
+  remove(id: number) {
+    return this.prisma.contact.delete({ where: { id } });
+  }
+
+  async removeMany(ids: number[]) {
+    return this.prisma.contact.deleteMany({ where: { id: { in: ids } } });
   }
 }

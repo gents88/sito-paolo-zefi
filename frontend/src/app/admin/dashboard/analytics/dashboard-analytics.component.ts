@@ -12,24 +12,14 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrls: ['./dashboard-analytics.component.scss'],
 })
 export class DashboardAnalyticsComponent {
-  @Input() contactBars: any[] = [
-    { date: new Date(Date.now() - 6*86400000), value: 2 },
-    { date: new Date(Date.now() - 5*86400000), value: 4 },
-    { date: new Date(Date.now() - 4*86400000), value: 6 },
-    { date: new Date(Date.now() - 3*86400000), value: 3 },
-    { date: new Date(Date.now() - 2*86400000), value: 5 },
-    { date: new Date(Date.now() - 86400000), value: 7 },
-    { date: new Date(), value: 6 },
-  ];
+  @Input() available = true;
+  @Input() contactBars: any[] = [];
   @Input() visitBars: any[] = [];
-  @Input() totalViews = 1240;
-  @Input() uniqueVisitors = 820;
-  @Input() publishedPosts = 42;
-  @Input() draftPosts = 7;
-  @Input() topPosts: any[] = [
-    { _id: '1', title: 'How to write clean code', slug: 'clean-code', viewCount: 420 },
-    { _id: '2', title: 'Angular best practices', slug: 'angular-best', viewCount: 312 },
-  ];
+  @Input() totalViews = 0;
+  @Input() uniqueVisitors = 0;
+  @Input() publishedPosts = 0;
+  @Input() draftPosts = 0;
+  @Input() topPosts: any[] = [];
 
   get publishedPercent(){ const t = this.publishedPosts + this.draftPosts || 1; return Math.round(this.publishedPosts / t * 100); }
   get draftPercent(){ return 100 - this.publishedPercent; }
@@ -39,8 +29,4 @@ export class DashboardAnalyticsComponent {
 
   contactBarHeight(v: number){ return (v * 8) + 'px'; }
   visitBarHeight(v: number){ return Math.min(140, v) + 'px'; }
-
-  ngOnInit(){
-    this.visitBars = this.contactBars.map(b => ({ date: b.date, value: b.value * 12 }));
-  }
 }

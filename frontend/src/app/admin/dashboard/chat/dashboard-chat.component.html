@@ -1,19 +1,24 @@
 <h2 class="section-label">{{ 'admin.chat_sessions_section' | translate }}</h2>
-<div class="analytics-grid adv-bottom-grid">
+
+<div *ngIf="!available" class="analytics-unavailable card" role="status">
+  <mat-icon>info</mat-icon>
+  <div>
+    <strong>{{ 'admin.feature_unavailable_title' | translate }}</strong>
+    <p class="text-muted">{{ 'admin.feature_unavailable_desc' | translate }}</p>
+  </div>
+</div>
+
+<div class="analytics-grid adv-bottom-grid" [class.analytics-grid--disabled]="!available">
   <section class="analytics-card card" style="grid-column: 1 / -1;">
     <div class="analytics-card__header">
       <div>
         <h2>{{ 'admin.chat_sessions_today' | translate }}</h2>
         <p class="text-muted">{{ 'admin.chat_sessions_today_desc' | translate }}</p>
       </div>
-      <button type="button" class="chat-load-btn" [disabled]="loadingTodaySessions" (click)="loadTodaySessions()">
-        <mat-icon [class.spin]="loadingTodaySessions">{{ loadingTodaySessions ? 'sync' : 'refresh' }}</mat-icon>
-        {{ loadingTodaySessions ? ('common.loading' | translate) : ('admin.chat_sessions_load' | translate) }}
-        <span *ngIf="!loadingTodaySessions && todaySessions.length > 0" class="chat-count-badge">{{ todaySessions.length }}</span>
-      </button>
+      <span *ngIf="todaySessions.length > 0" class="chat-count-badge">{{ todaySessions.length }}</span>
     </div>
 
-    <p *ngIf="!todaySessions.length && !loadingTodaySessions" class="text-muted" style="margin-top:0.5rem;">{{ 'admin.chat_sessions_empty' | translate }}</p>
+    <p *ngIf="!todaySessions.length" class="text-muted" style="margin-top:0.5rem;">{{ 'admin.chat_sessions_empty' | translate }}</p>
 
     <div *ngIf="todaySessions.length" class="chat-session-list">
       <div *ngFor="let session of todaySessions" class="chat-session-row" [class.chat-session-row--open]="expandedSessionId === session.sessionId">
@@ -40,9 +45,7 @@
       </div>
 
       <div *ngIf="todaySessionsTotalPages > 1" class="chat-pagination">
-        <button type="button" class="chat-load-btn" [disabled]="todaySessionsPage <= 1 || loadingTodaySessions" (click)="loadTodaySessions(todaySessionsPage - 1)"><mat-icon>chevron_left</mat-icon></button>
         <span class="text-muted" style="font-size:0.82rem;">{{ todaySessionsPage }} / {{ todaySessionsTotalPages }}</span>
-        <button type="button" class="chat-load-btn" [disabled]="todaySessionsPage >= todaySessionsTotalPages || loadingTodaySessions" (click)="loadTodaySessions(todaySessionsPage + 1)"><mat-icon>chevron_right</mat-icon></button>
       </div>
     </div>
   </section>

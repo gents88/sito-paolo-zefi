@@ -1,15 +1,17 @@
 version: '3.8'
 
 services:
-  mongodb:
-    image: mongo:latest
-    container_name: sito-paulo-zefi-mongodb
+  postgres:
+    image: postgres:16-alpine
+    container_name: sito-paulo-zefi-postgres
     ports:
-      - '27017:27017'
+      - '5432:5432'
     environment:
-      MONGO_INITDB_DATABASE: sito-paulo-zefi
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: sito_db
     volumes:
-      - mongodb_data:/data/db
+      - postgres_data:/var/lib/postgresql/data
     networks:
       - sito-network
 
@@ -22,11 +24,11 @@ services:
       - '3000:3000'
     environment:
       NODE_ENV: development
-      MONGODB_URI: mongodb://mongodb:27017/sito-paulo-zefi
+      DATABASE_URL: postgresql://postgres:password@postgres:5432/sito_db?schema=public
       JWT_SECRET: super_secret_key
       JWT_EXPIRATION: 24h
     depends_on:
-      - mongodb
+      - postgres
     volumes:
       - ./backend/src:/app/src
     networks:
@@ -49,7 +51,7 @@ services:
       - sito-network
 
 volumes:
-  mongodb_data:
+  postgres_data:
 
 networks:
   sito-network:

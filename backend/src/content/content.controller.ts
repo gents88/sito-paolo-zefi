@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { ContentService } from './content.service';
 
 @Controller('content')
@@ -21,10 +21,8 @@ export class ContentController {
   }
 
   @Get('stories/:id')
-  async getStoryById() {
-    // controller method placeholder; actual logic handled in service
-    // kept signature for clarity; service method will be called from route
-    return;
+  async getStoryById(@Param('id') id: string) {
+    return await this.contentService.getStory(id);
   }
 
   @Get('timeline')

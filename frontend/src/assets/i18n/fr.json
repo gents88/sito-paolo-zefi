@@ -91,6 +91,9 @@
     "top_posts_title": "Top Articles",
     "top_posts_desc_card": "Articles les plus consultés",
     "top_posts_empty": "Aucun article disponible",
+    "no_chart_data": "Aucune donnée disponible",
+    "feature_unavailable_title": "Fonctionnalité pas encore disponible",
+    "feature_unavailable_desc": "Cette section nécessite une intégration qui n'a pas encore été mise en place.",
     "consent": {
       "title": "Consentements Utilisateur",
       "desc": "Statistiques de Consentement",
