@@ -1,19 +1,23 @@
 version: '3.8'
 
 services:
-  postgres:
-    image: postgres:16-alpine
-    container_name: sito-paulo-zefi-postgres
+  mongodb:
+    image: mongo:7
+    container_name: sito-paulo-zefi-mongodb
+    command: ['--replSet', 'rs0', '--bind_ip_all']
     ports:
-      - '5432:5432'
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: sito_db
+      - '27017:27017'
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - mongodb_data:/data/db
     networks:
       - sito-network
+    healthcheck:
+      test: >
+        mongosh --quiet --eval "try { rs.status().ok } catch (e) { rs.initiate({_id:'rs0',members:[{_id:0,host:'localhost:27017'}]}).ok }"
+      interval: 5s
+      timeout: 10s
+      start_period: 5s
+      retries: 30
 
   backend:
     build:
@@ -24,11 +28,12 @@ services:
       - '3000:3000'
     environment:
       NODE_ENV: development
-      DATABASE_URL: postgresql://postgres:password@postgres:5432/sito_db?schema=public
+      DATABASE_URL: mongodb://mongodb:27017/sito_db?replicaSet=rs0
       JWT_SECRET: super_secret_key
       JWT_EXPIRATION: 24h
     depends_on:
-      - postgres
+      mongodb:
+        condition: service_healthy
     volumes:
       - ./backend/src:/app/src
     networks:
@@ -51,7 +56,7 @@ services:
       - sito-network
 
 volumes:
-  postgres_data:
+  mongodb_data:
 
 networks:
   sito-network:

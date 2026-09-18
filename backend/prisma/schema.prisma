@@ -3,12 +3,12 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
   email     String   @unique
   password  String
   role      Role     @default(USER)
@@ -16,55 +16,55 @@ model User {
 }
 
 model Category {
-  id    Int     @id @default(autoincrement())
-  name  String  @unique
-  slug  String  @unique
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  name     String    @unique
+  slug     String    @unique
   articles Article[]
   books    Book[]
   videos   Video[]
 }
 
 model Article {
-  id          Int      @id @default(autoincrement())
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
   title       String
   subtitle    String?
   description String?
   content     String
   image       String?
-  tags        String[] @default([])
-  status      Status   @default(DRAFT)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  categoryId  Int?
+  tags        String[]  @default([])
+  status      Status    @default(DRAFT)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  categoryId  String?   @db.ObjectId
   category    Category? @relation(fields: [categoryId], references: [id])
 }
 
 model Book {
-  id          Int      @id @default(autoincrement())
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
   title       String
   author      String
   description String?
   coverImage  String?
   amazonLink  String?
   pdfLink     String?
-  createdAt   DateTime @default(now())
-  categoryId  Int?
+  createdAt   DateTime  @default(now())
+  categoryId  String?   @db.ObjectId
   category    Category? @relation(fields: [categoryId], references: [id])
 }
 
 model Video {
-  id          Int      @id @default(autoincrement())
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
   title       String
   description String?
   youtubeUrl  String
   thumbnail   String?
-  categoryId  Int?
+  categoryId  String?   @db.ObjectId
   category    Category? @relation(fields: [categoryId], references: [id])
-  createdAt   DateTime @default(now())
+  createdAt   DateTime  @default(now())
 }
 
 model Contact {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
   nome      String
   email     String
   oggetto   String

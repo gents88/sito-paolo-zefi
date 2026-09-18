@@ -31,5 +31,5 @@ export class CreateArticleDto {
   status?: StatusEnum;
 
   @IsOptional()
-  categoryId?: number;
+  categoryId?: string;
 }

@@ -17,7 +17,7 @@ export class ArticlesController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.service.findOne(Number(id));
+    return this.service.findOne(id);
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
@@ -31,13 +31,13 @@ export class ArticlesController {
   @Roles('ADMIN')
   @Put(':id')
   update(@Param('id') id: string, @Body() dto: UpdateArticleDto) {
-    return this.service.update(Number(id), dto);
+    return this.service.update(id, dto);
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('ADMIN')
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.service.remove(Number(id));
+    return this.service.remove(id);
   }
 }

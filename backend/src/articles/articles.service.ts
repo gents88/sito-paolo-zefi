@@ -25,15 +25,15 @@ export class ArticlesService {
     return this.prisma.article.findMany({ where, take: limit, skip, orderBy } as any);
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return this.prisma.article.findUnique({ where: { id } });
   }
 
-  update(id: number, dto: UpdateArticleDto) {
+  update(id: string, dto: UpdateArticleDto) {
     return this.prisma.article.update({ where: { id }, data: dto as any });
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return this.prisma.article.delete({ where: { id } });
   }
 }

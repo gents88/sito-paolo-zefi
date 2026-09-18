@@ -13,15 +13,15 @@ export class CategoriesService {
     return this.prisma.category.findMany();
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return this.prisma.category.findUnique({ where: { id } });
   }
 
-  update(id: number, data: any) {
+  update(id: string, data: any) {
     return this.prisma.category.update({ where: { id }, data });
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return this.prisma.category.delete({ where: { id } });
   }
 }

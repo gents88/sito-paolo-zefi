@@ -8,5 +8,5 @@ export class UpdateArticleDto {
 	image?: string;
 	tags?: string[];
 	status?: StatusEnum;
-	categoryId?: number;
+	categoryId?: string;
 }

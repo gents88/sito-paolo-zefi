@@ -16,7 +16,7 @@ export class AdminApiService {
     return this.http.get(`${this.base}/articles`, { params });
   }
 
-  getArticle(id: number) {
+  getArticle(id: string) {
     return this.http.get(`${this.base}/articles/${id}`);
   }
 
@@ -24,11 +24,11 @@ export class AdminApiService {
     return this.http.post(`${this.base}/articles`, payload);
   }
 
-  updateArticle(id: number, payload: any) {
+  updateArticle(id: string, payload: any) {
     return this.http.put(`${this.base}/articles/${id}`, payload);
   }
 
-  deleteArticle(id: number) {
+  deleteArticle(id: string) {
     return this.http.delete(`${this.base}/articles/${id}`);
   }
 
@@ -40,7 +40,7 @@ export class AdminApiService {
     return this.http.get(`${this.base}/books`, { params });
   }
 
-  getBook(id: number) {
+  getBook(id: string) {
     return this.http.get(`${this.base}/books/${id}`);
   }
 
@@ -48,11 +48,11 @@ export class AdminApiService {
     return this.http.post(`${this.base}/books`, payload);
   }
 
-  updateBook(id: number, payload: any) {
+  updateBook(id: string, payload: any) {
     return this.http.put(`${this.base}/books/${id}`, payload);
   }
 
-  deleteBook(id: number) {
+  deleteBook(id: string) {
     return this.http.delete(`${this.base}/books/${id}`);
   }
 
@@ -64,7 +64,7 @@ export class AdminApiService {
     return this.http.get(`${this.base}/videos`, { params });
   }
 
-  getVideo(id: number) {
+  getVideo(id: string) {
     return this.http.get(`${this.base}/videos/${id}`);
   }
 
@@ -72,11 +72,11 @@ export class AdminApiService {
     return this.http.post(`${this.base}/videos`, payload);
   }
 
-  updateVideo(id: number, payload: any) {
+  updateVideo(id: string, payload: any) {
     return this.http.put(`${this.base}/videos/${id}`, payload);
   }
 
-  deleteVideo(id: number) {
+  deleteVideo(id: string) {
     return this.http.delete(`${this.base}/videos/${id}`);
   }
 
@@ -85,7 +85,7 @@ export class AdminApiService {
     return this.http.get(`${this.base}/categories`);
   }
 
-  getCategory(id: number) {
+  getCategory(id: string) {
     return this.http.get(`${this.base}/categories/${id}`);
   }
 
@@ -93,11 +93,11 @@ export class AdminApiService {
     return this.http.post(`${this.base}/categories`, payload);
   }
 
-  updateCategory(id: number, payload: any) {
+  updateCategory(id: string, payload: any) {
     return this.http.put(`${this.base}/categories/${id}`, payload);
   }
 
-  deleteCategory(id: number) {
+  deleteCategory(id: string) {
     return this.http.delete(`${this.base}/categories/${id}`);
   }
 
@@ -111,15 +111,15 @@ export class AdminApiService {
     return this.http.get<any[]>(`${this.base}/contacts`);
   }
 
-  markContactRead(id: number) {
+  markContactRead(id: string) {
     return this.http.patch(`${this.base}/contacts/${id}/read`, {});
   }
 
-  deleteContact(id: number) {
+  deleteContact(id: string) {
     return this.http.delete(`${this.base}/contacts/${id}`);
   }
 
-  deleteContacts(ids: number[]) {
+  deleteContacts(ids: string[]) {
     return this.http.delete(`${this.base}/contacts/bulk`, { body: { ids } });
   }
 }

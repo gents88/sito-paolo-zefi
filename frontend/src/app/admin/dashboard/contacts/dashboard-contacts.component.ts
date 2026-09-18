@@ -46,7 +46,7 @@ export class DashboardContactsComponent {
     if (!this.anySelected) return;
     const ids = Array.from(this.selectedIds);
     this.bulkDeleting = true;
-    this.api.deleteContacts(ids.map(Number)).subscribe({
+    this.api.deleteContacts(ids).subscribe({
       next: () => {
         this.bulkDeleting = false;
         this.recentContacts = this.recentContacts.filter(c => !this.selectedIds.has(c._id));

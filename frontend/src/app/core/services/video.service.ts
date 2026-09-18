@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 export interface Video {
-  id: number;
+  id: string;
   title: string;
   description?: string;
   youtubeUrl: string;

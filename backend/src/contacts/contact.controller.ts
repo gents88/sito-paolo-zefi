@@ -40,20 +40,20 @@ export class ContactController {
   @Roles('ADMIN')
   @Patch(':id/read')
   markRead(@Param('id') id: string) {
-    return this.contactService.markRead(Number(id), true);
+    return this.contactService.markRead(id, true);
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('ADMIN')
   @Delete('bulk')
-  removeMany(@Body('ids') ids: number[]) {
-    return this.contactService.removeMany((ids || []).map(Number));
+  removeMany(@Body('ids') ids: string[]) {
+    return this.contactService.removeMany(ids || []);
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('ADMIN')
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.contactService.remove(Number(id));
+    return this.contactService.remove(id);
   }
 }

@@ -21,15 +21,15 @@ export class ContactService {
     return this.prisma.contact.findMany({ orderBy: { createdAt: 'desc' } });
   }
 
-  markRead(id: number, read = true) {
+  markRead(id: string, read = true) {
     return this.prisma.contact.update({ where: { id }, data: { read } });
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return this.prisma.contact.delete({ where: { id } });
   }
 
-  async removeMany(ids: number[]) {
+  async removeMany(ids: string[]) {
     return this.prisma.contact.deleteMany({ where: { id: { in: ids } } });
   }
 }

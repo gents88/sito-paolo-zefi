@@ -23,7 +23,7 @@ import { AdminApiService } from '../../core/services/admin-api.service';
 })
 export class AdminArticleFormComponent implements OnInit {
   form: FormGroup;
-  id?: number;
+  id?: string;
 
   constructor(private api: AdminApiService, private route: ActivatedRoute) {
     this.form = new FormGroup({ title: new FormControl('', Validators.required), subtitle: new FormControl(''), content: new FormControl('', Validators.required) });
@@ -32,7 +32,7 @@ export class AdminArticleFormComponent implements OnInit {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.id = Number(id);
+      this.id = id;
       this.api.getArticle(this.id).subscribe(a => this.form.patchValue(a));
     }
   }

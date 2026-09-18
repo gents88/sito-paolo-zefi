@@ -16,15 +16,15 @@ export class BooksService {
     return this.prisma.book.findMany({ take: limit, skip, orderBy: { createdAt: 'desc' } } as any);
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return this.prisma.book.findUnique({ where: { id } });
   }
 
-  update(id: number, data: any) {
+  update(id: string, data: any) {
     return this.prisma.book.update({ where: { id }, data });
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return this.prisma.book.delete({ where: { id } });
   }
 }

@@ -23,7 +23,7 @@ import { AdminApiService } from '../../core/services/admin-api.service';
 })
 export class AdminVideoFormComponent implements OnInit {
   form: FormGroup;
-  id?: number;
+  id?: string;
 
   constructor(private api: AdminApiService, private route: ActivatedRoute) {
     this.form = new FormGroup({ title: new FormControl('', Validators.required), youtubeUrl: new FormControl('', Validators.required), description: new FormControl('') });
@@ -32,7 +32,7 @@ export class AdminVideoFormComponent implements OnInit {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.id = Number(id);
+      this.id = id;
       this.api.getVideo(this.id).subscribe(a => this.form.patchValue(a));
     }
   }

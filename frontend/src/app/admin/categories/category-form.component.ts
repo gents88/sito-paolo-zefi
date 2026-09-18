@@ -22,7 +22,7 @@ import { AdminApiService } from '../../core/services/admin-api.service';
 })
 export class AdminCategoryFormComponent implements OnInit {
   form: FormGroup;
-  id?: number;
+  id?: string;
 
   constructor(private api: AdminApiService, private route: ActivatedRoute) {
     this.form = new FormGroup({ name: new FormControl('', Validators.required), slug: new FormControl('', Validators.required) });
@@ -31,7 +31,7 @@ export class AdminCategoryFormComponent implements OnInit {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.id = Number(id);
+      this.id = id;
       this.api.getCategory(this.id).subscribe(a => this.form.patchValue(a));
     }
   }

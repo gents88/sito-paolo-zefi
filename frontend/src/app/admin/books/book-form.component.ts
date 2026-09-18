@@ -23,7 +23,7 @@ import { AdminApiService } from '../../core/services/admin-api.service';
 })
 export class AdminBookFormComponent implements OnInit {
   form: FormGroup;
-  id?: number;
+  id?: string;
 
   constructor(private api: AdminApiService, private route: ActivatedRoute) {
     this.form = new FormGroup({ title: new FormControl('', Validators.required), author: new FormControl('', Validators.required), description: new FormControl('') });
@@ -32,7 +32,7 @@ export class AdminBookFormComponent implements OnInit {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.id = Number(id);
+      this.id = id;
       this.api.getBook(this.id).subscribe(a => this.form.patchValue(a));
     }
   }

@@ -16,15 +16,15 @@ export class VideosService {
     return this.prisma.video.findMany({ take: limit, skip, orderBy: { createdAt: 'desc' } } as any);
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return this.prisma.video.findUnique({ where: { id } });
   }
 
-  update(id: number, data: any) {
+  update(id: string, data: any) {
     return this.prisma.video.update({ where: { id }, data });
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return this.prisma.video.delete({ where: { id } });
   }
 }

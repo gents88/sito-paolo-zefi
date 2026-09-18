@@ -15,7 +15,7 @@ export class BooksController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.service.findOne(Number(id));
+    return this.service.findOne(id);
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
@@ -29,13 +29,13 @@ export class BooksController {
   @Roles('ADMIN')
   @Put(':id')
   update(@Param('id') id: string, @Body() body: any) {
-    return this.service.update(Number(id), body);
+    return this.service.update(id, body);
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('ADMIN')
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.service.remove(Number(id));
+    return this.service.remove(id);
   }
 }
